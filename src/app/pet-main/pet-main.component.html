@@ -1,0 +1,7 @@
+<div class="container">  
+        <p>Componente de mascotas</p>        
+        <app-pet-form [title]="mainTitle" [pet]="mainPet" (flagToReaload)="reloadToDo($event)"></app-pet-form>
+        <hr>
+        <app-pet-list (petToEdit)="mainUpdate($event)" [flagToReload]="mainReload" (reloadComplete)="reloadDone($event)"></app-pet-list>
+</div>
+

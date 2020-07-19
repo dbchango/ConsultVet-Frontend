@@ -1,0 +1,32 @@
+<div class="container">
+<p>pet-list works!</p>
+    <table  class="">
+        <thead>
+            <td>Nombre</td>
+            <td>Color</td>
+            <td>Edad</td>
+            <td>Sexo</td>
+            <td>Tipo</td>
+            <td>Cliente</td>
+            <td></td>
+        </thead>
+        <tr *ngFor="let pet of pets">
+       
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.color }}</td>
+            <td>{{ pet.age }}</td>
+            <td>{{ pet.sex }}</td>
+            <td>{{ pet.type }}</td>
+            <td>{{ pet.idclient }}</td>
+            <td>
+                <button class="btn btn-sm btn-info" (click)="retrieve(pet)"><fa-icon [icon]="faInfo"></fa-icon></button>
+                <button class="btn btn-sm btn-warning" (click)="update(pet)"><fa-icon [icon]="faEdit"></fa-icon></button>
+                <button class="btn btn-sm btn-danger" (click)="delete(pet)"><fa-icon [icon]="faEraser"></fa-icon></button>
+            </td>
+        </tr>
+    </table>
+
+
+   
+
+</div>

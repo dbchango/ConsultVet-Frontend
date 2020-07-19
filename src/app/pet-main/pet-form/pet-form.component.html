@@ -1,0 +1,101 @@
+<div class="container">
+    <div>
+        <p>{{ title }}</p>
+    
+        <form [formGroup]="formPet" (ngSubmit)="onSubmit()" class="user">
+            <div class="card-body">
+                <div class="input-group md-3 ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <input formControlName="name" [(ngModel)]="pet.name" [ngClass]="{'is-invalid': submitted && f.name.errors }"  type="text" class="form-control form-control-user " placeholder="Nombre">
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Los nombres son requeridos</div>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group md-3 ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <input formControlName="color" [(ngModel)]="pet.color" [ngClass]="{'is-invalid': submitted && f.color.errors }"  type="text" class="form-control form-control-user " placeholder="Color">
+                    <div *ngIf="submitted && f.color.errors" class="invalid-feedback">
+                        <div *ngIf="f.color.errors.required">Los apellidos son requeridos</div>
+                    </div>
+                </div><br>
+                <div class="input-group md-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <input formControlName="age" [(ngModel)]="pet.age" [ngClass]="{'is-invalid': submitted && f.age.errors }"  type="text" class="form-control form-control-user" placeholder="Edad">
+                    <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                        <div *ngIf="f.age.errors.required">La cédula es requerida</div>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group md-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <input formControlName="idclient" [(ngModel)]="pet.idclient" [ngClass]="{'is-invalid': submitted && f.idclient.errors }"  type="text" class="form-control form-control-user" placeholder="Cliente">
+                    <div *ngIf="submitted && f.idclient.errors" class="invalid-feedback">
+                        <div *ngIf="f.idclient.errors.required">La cédula es requerida</div>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group md-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <select formControlName="sex" [(ngModel)]="pet.sex" [ngClass]="{'is-invalid': submitted && f.sex.errors}"  class="form-control form-control-user">
+                        <option>Macho</option>
+                        <option>Hembra</option>
+                    
+                    </select>
+                    <div *ngIf="submitted && f.sex.errors" class="invalid-feedback">
+                        <div *ngIf="f.sex.errors.required">El género es requerido</div>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group md-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]='' class="iconFawesome"></fa-icon></span>
+                    </div>
+                    <select formControlName="type" [(ngModel)]="pet.type" [ngClass]="{'is-invalid': submitted && f.type.errors}"  class="form-control form-control-user">
+                        <option>Perro</option>
+                        <option>Gato</option>
+                        <option>Uron</option>
+                        <option>Ave</option>
+                        <option>Otro</option>
+                    </select>
+                    <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                        <div *ngIf="f.type.errors.required">El género es requerido</div>
+                    </div>
+                </div>
+                <br>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">
+                        <fa-icon [icon]=''></fa-icon>&nbsp;Guardar</button>
+                    <button type="reset" (click)="onReset()" class="btn btn-danger">
+                        <fa-icon [icon]=''></fa-icon>&nbsp;Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+            
+    
+    
+    
+            
+            
+            
+        
+                    
+    
+    
+    
+    
+    
+    
+</div>

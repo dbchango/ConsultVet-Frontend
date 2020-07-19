@@ -1,0 +1,13 @@
+
+<div class="container">
+    <p>Componente de Cliente</p>
+    <div class="row">
+        <div class="col">
+            
+            <app-client-form  [title] = "mainTitle" [client]="mainClient" (flagToReload)="reloadToDo($event)"></app-client-form>
+        </div>
+        <div class="col">
+            <app-client-list [flagToReload]="mainReload" (clientToEdit)="mainUpdate($event)" (reloadComplete)="reloadDone($event)"></app-client-list>
+        </div>
+    </div>
+</div>
