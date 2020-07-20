@@ -3,6 +3,12 @@
         <p>{{ title }}</p>
     
         <form [formGroup]="formPet" (ngSubmit)="onSubmit()" class="user">
+            
+
+
+
+
+
             <div class="card-body">
                 <div class="input-group md-3 ">
                     <div class="input-group-prepend ">
@@ -81,6 +87,63 @@
                 </div>
             </div>
         </form>
+
+        <form [formGroup]="formPet" (ngSubmit)="onSubmit()" class="user">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field apparience="legacy" class="formWidth">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" formControlName="name" [(ngModel)]="pet.name" [ngClass]="{'is-invalid': submitted && f.name.errors }">
+                        <mat-hint>Ej: Toby</mat-hint>
+                        <mat-error *ngIf="f.name.hasError('required')&&submitted">
+                            No ha ingresado un nombre
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field apparience="legacy" class="formWidth">
+                        <mat-label>Edad</mat-label>
+                        <input placeholder="Años" matInput type="number" min=0 formControlName="age" [(ngModel)]="pet.age" [ngClass]="{'is-invalid': submitted && f.age.errors }">
+                        <mat-hint>Ej: 12</mat-hint>
+                        <mat-error *ngIf="f.age.hasError('required')&&submitted">
+                            No ha ingresado la edad
+                        </mat-error>
+                    </mat-form-field>
+
+                    
+                    <mat-form-field apparience="field" class="short-input formWidth">
+                        <mat-label>Sexo</mat-label>
+                        <mat-select [(ngModel)]="pet.sex" formControlName="sex" [ngClass]="{'is-invalid': submitted && f.sex.errors }">
+                            <mat-option value="Macho">Macho</mat-option>
+                            <mat-option value="Hembra">Hembra</mat-option>
+                            <mat-option value="Otros">Otros</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.sex.hasError('required')&&submitted">
+                            No ha seleccionado un sexo
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field apparience="field" class="short-input formWidth">
+                        <mat-label>Especie</mat-label>
+                        <mat-select [(ngModel)]="pet.type" formControlName="type" [ngClass]="{'is-invalid': submitted && f.type.errors }">
+                            <mat-option value="Perro">Perro</mat-option>
+                            <mat-option value="Gato">Gato</mat-option>
+                            <mat-option value="Perico">Perico</mat-option>
+                            <mat-option value="Hamster">Hamster</mat-option>
+                            <mat-option value="Otros">Otros</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.type.hasError('required')&&submitted">
+                            No ha seleccionado una especie
+                        </mat-error>
+                    </mat-form-field>
+
+                    
+
+                </div>
+            </div>
+
+
+        </form>
+
     </div>
     
             

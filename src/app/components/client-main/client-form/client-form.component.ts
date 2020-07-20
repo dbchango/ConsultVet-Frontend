@@ -30,6 +30,8 @@ export class ClientFormComponent implements OnInit {
   submitted = false;//indica si el registro se proceso con exito
   constructor(private clientService: ClientService, private formBuilder: FormBuilder) { }
 
+  
+
   ngOnInit(): void {
     this.formClient = this.formBuilder.group({
       name: ['', [Validators.required]],

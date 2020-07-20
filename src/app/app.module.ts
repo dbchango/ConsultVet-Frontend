@@ -32,6 +32,8 @@ import { ConsultFormComponent } from './components/consult-main/consult-form/con
 import { ConsultListComponent } from './components/consult-main/consult-list/consult-list.component';
 import { ServiceInterceptor } from './core/interceptors/service.interceptor';
 import { PetInfoComponent } from './components/pet-main/pet-info/pet-info.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -64,6 +66,7 @@ import { PetInfoComponent } from './components/pet-main/pet-info/pet-info.compon
     MatNativeDateModule,
     MatButtonModule,
     MatListModule,
+    MatSelectModule,
       
   ],
   providers: [

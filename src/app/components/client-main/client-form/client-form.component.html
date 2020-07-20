@@ -1,92 +1,100 @@
 <div>
     <p>{{ title }}</p>
     
-
+    
     <form [formGroup]="formClient" (ngSubmit)="onSubmit()" class="user">
-        
-        <div class="card-body">
-            <div class="input-group md-3 ">
-                <div class="input-group-prepend ">
-                    <span class="input-group-text"><fa-icon [icon]='faQuoteLeft' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.name.errors }"  type="text" class="form-control form-control-user " placeholder="Nombres">
-                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                    <div *ngIf="f.name.errors.required">Los nombres son requeridos</div>
-                </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="legacy" class="formWidth" >
+                    <mat-label>Nombre</mat-label>
+
+                    <input matInput type="text" formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.lastname.errors }">
+                    <mat-hint>Ej:. Paúl Andrés</mat-hint>
+                    <mat-error *ngIf="f.name.hasError('required')&&submitted">
+                        El nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+                
             </div>
-            <br>
-            <div class="input-group md-3 ">
-                <div class="input-group-prepend ">
-                    <span class="input-group-text"><fa-icon [icon]='faQuoteLeft' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="lastname" [(ngModel)]="client.lastname" [ngClass]="{'is-invalid': submitted && f.lastname.errors }"  type="text" class="form-control form-control-user " placeholder="Apellidos">
-                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                    <div *ngIf="f.lastname.errors.required">Los apellidos son requeridos</div>
-                </div>
-            </div><br>
-            <div class="input-group md-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><fa-icon [icon]='faIdCard' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="ci" [(ngModel)]="client.ci" [ngClass]="{'is-invalid': submitted && f.ci.errors }"  type="text" class="form-control form-control-user" placeholder="Cedula">
-                <div *ngIf="submitted && f.ci.errors" class="invalid-feedback">
-                    <div *ngIf="f.ci.errors.required">La cédula es requerida</div>
-                </div>
-            </div>
-            <br>
-            <div class="input-group md-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><fa-icon [icon]='faDirections' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="direction" [(ngModel)]="client.direction" [ngClass]="{'is-invalid': submitted && f.direction.errors }"  type="text" class="form-control form-control-user" placeholder="Direccion">
-                <div *ngIf="submitted && f.direction.errors" class="invalid-feedback">
-                    <div *ngIf="f.direction.errors.required">La direccion es requerida</div>
-                </div>
-            </div>
-            <br>
-            <div class="input-group md-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><fa-icon [icon]='faPhoneAlt' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="phone" [(ngModel)]="client.phone"   type="text" class="form-control form-control-user" placeholder="Teléfono">
-                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                    <div *ngIf="f.phone.errors.required">El teléfono es requerido</div>
-                </div>
-            </div>
-            <br>
-            <div class="input-group md-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><fa-icon [icon]='faCalendarDay' class="iconFawesome"></fa-icon></span>
-                </div>
-                <input formControlName="borndate" [(ngModel)]="client.borndate" [ngClass]="{'is-invalid': submitted && f.borndate.errors }"  type="date" class="form-control form-control-user">
-                <div *ngIf="submitted && f.borndate.errors" class="invalid-feedback">
-                    <div *ngIf="f.borndate.errors.required">La fecha de nacimiento es requerida</div>
-                </div>
-            </div>
-            <br>
-            <div class="input-group md-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><fa-icon [icon]='faVenusMars' class="iconFawesome"></fa-icon></span>
-                </div>
-                <select formControlName="gender" [(ngModel)]="client.gender" [ngClass]="{'is-invalid': submitted && f.gender.errors}"  class="form-control form-control-user">
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                    <option>Otro</option>
-                </select>
-                <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                    <div *ngIf="f.gender.errors.required">El género es requerido</div>
-                </div>
-            </div>
-            <br>
-            <div class="btn-group">
-                <button type="submit" class="btn btn-success">
-                    <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
-                <button type="reset" (click)="onReset()" class="btn btn-danger">
-                    <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+            <div class="col">
+                <mat-form-field apparience="fill" class="short-input formWidth" >
+                    <mat-label>Apellido</mat-label>
+                    <input matNativeControl formControlName="lastname" [(ngModel)]="client.lastname" [ngClass]="{'is-invalid': submitted && f.lastname.errors }">
+                    <mat-error *ngIf="f.lastname.hasError('required')&&submitted">
+                        El Apellido es requerido
+                    </mat-error>
+                </mat-form-field>
+                
             </div>
         </div>
-    </form>
+        <div class="row">
+            <div class="col-7">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Direccion</mat-label>
+                    <input matNativeControl formControlName="direction" [(ngModel)]="client.direction" [ngClass]="{'is-invalid': submitted && f.direction.errors }">
+                    <mat-hint>Ej:. Pérez Sánchez</mat-hint>
+                    <mat-error *ngIf="f.direction.hasError('required')&&submitted">
+                        La dirección es requerida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-5">              
+                <mat-form-field apparience="fill" class="short-input formWidth" hintLabel="Maximo 10 caracteres">
+                    <mat-label>Cedula</mat-label>
+                    <input matNativeControl formControlName="ci" [maxLength]=10 [(ngModel)]="client.ci" [ngClass]="{'is-invalid': submitted && f.ci.errors }">
+                    <mat-error *ngIf="f.ci.hasError('required')&&submitted">
+                        El número de cédula es requerido
+                    </mat-error>   
+                </mat-form-field>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Telefono</mat-label>
+                    <input [maxLength]=10 matNativeControl formControlName="phone" [(ngModel)]="client.phone" [ngClass]="{'is-invalid': submitted && f.phone.errors }">
+                    <mat-error *ngIf="f.phone.hasError&&submitted">
+                        El número de teléfono es requerido
+                    </mat-error>   
+                </mat-form-field>
+            </div>
+            <div class="col">
+                
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    
+                       
+    
 
+                    <mat-label>Género</mat-label>
+                    <mat-select [(ngModel)]="client.gender" formControlName="gender" [ngClass]="{'is-invalid': submitted && f.gender.errors }">
+                        <mat-option value="Masculino">Masculino</mat-option>
+                        <mat-option value="Femenino">Femenino</mat-option>
+                        <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="f.gender.hasError('required')&&submitted">
+                        No ha seleccionado un genero
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matNativeControl formControlName="borndate" [(ngModel)]="client.borndate" [ngClass]="{'is-invalid': submitted && f.borndate.errors }" type="date">
+                    <mat-error *ngIf="f.borndate.hasError('required')&&submitted">
+                        No ha ingresado la fecha de nacimiento
+                    </mat-error>   
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success">
+                <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
+            <button type="reset" (click)="onReset()" class="btn btn-danger">
+                <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+        </div>
+    </form>
+    
 
 </div>
 
