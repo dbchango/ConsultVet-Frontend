@@ -1,0 +1,17 @@
+<div class="container">  
+        <p>Componente de mascotas</p>        
+        
+    
+
+
+        <div class="row">
+                <div class="col">
+                    
+                        <app-pet-form [title]="mainTitle" [pet]="mainPet" (flagToReaload)="reloadToDo($event)"></app-pet-form>
+                </div>
+                <div class="col">
+                        <app-pet-list (petToEdit)="mainUpdate($event)" [flagToReload]="mainReload" (reloadComplete)="reloadDone($event)"></app-pet-list>
+                </div>
+            </div>
+</div>
+

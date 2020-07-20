@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClientMainComponent } from './client-main/client-main.component';
-import { PetMainComponent } from './pet-main/pet-main.component';
+import { ClientMainComponent } from './components/client-main/client-main.component';
+import { PetMainComponent } from './components/pet-main/pet-main.component';
+
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: 'client', component: ClientMainComponent},
-  {path: 'pet', component: PetMainComponent}
+  {path: 'pet', component: PetMainComponent},
+
+
+  
 ];
 
 @NgModule({

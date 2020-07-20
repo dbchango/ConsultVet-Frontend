@@ -1,0 +1,32 @@
+<div class="container">
+    
+ 
+            <p>Lista de ciientes</p>
+            <table class="table">
+                <thead>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
+                    <td>Cedula</td>
+
+                    <td>Genero</td>
+                    <td></td>
+                </thead>
+                <tr *ngFor='let client of clients'>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.lastname }}</td>
+                    <td>{{ client.ci }}</td>
+                    <td>{{ client.gender }}</td>
+                    <td>
+                        <button class="btn btntable btn-sm btn-info btntable"  (click)="retrieve(client)"><fa-icon [icon]="faInfo"></fa-icon></button>
+                        <button class="btn btntablen btn-sm btn-warning btntable" (click)="update(client)"><fa-icon [icon]="faEdit"></fa-icon></button>
+                        <button class="btn btntable btn-sm btn-danger btntable" (click)="delete(client)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                    </td>
+                </tr>
+            </table>
+            
+
+
+
+</div>
+
+
