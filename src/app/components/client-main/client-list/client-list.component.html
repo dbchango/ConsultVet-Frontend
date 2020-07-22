@@ -1,25 +1,31 @@
 <div class="container">
-            <!--Clients table-->
-            <table class="table">
-                <thead>
-                    <td>Apellidos</td>
-                    <td>Nombres</td>
-                    <td>Cedula</td>
-                    <td>Genero</td>
-                    <td></td>
-                </thead>
-                <tr *ngFor='let client of clients'>
-                    <td>{{ client.lastname }}</td>
-                    <td>{{ client.name }}</td>
-                    <td>{{ client.ci }}</td>
-                    <td>{{ client.gender }}</td>
-                    <td>
-                        <button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/client', client.idclient]"><fa-icon [icon]="faInfo"></fa-icon></button>
-                        <button mat-button class="btn btn-sm btn-warning btntable" (click)="update(client)"><fa-icon [icon]="faEdit"></fa-icon></button>
-                        <button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(client)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                    </td>
-                </tr>
-            </table>
+    <!--Clients table-->
+    <table class="table table-hove">
+        <thead>
+            <td>No.</td>
+            <td>Apellidos</td>
+            <td>Nombres</td>
+            <td>Cedula</td>
+            <td>Genero</td>
+            <td></td>
+        </thead>
+        <tr *ngFor='let client of clients | paginate: {itemsPerPage:10, currentPage: actualPage, totalItems: total }; let i = index'>
+            <td>{{ i+1 }}</td>
+            <td>{{ client.lastname }}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.ci }}</td>
+            <td>{{ client.gender }}</td>
+            <td>
+                <button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/client', client.idclient]"><fa-icon [icon]="faInfo"></fa-icon></button>
+                <button mat-button class="btn btn-sm btn-warning btntable" (click)="update(client)"><fa-icon [icon]="faEdit"></fa-icon></button>
+                <button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(client)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            </td>
+        </tr>
+    </table>
+ 
+                      
+    <pagination-controls (pageChange)="actualPage=$event" previousLabel="Anterior" nextLabel="Siguiente">1</pagination-controls>
+    
 </div>
 
 

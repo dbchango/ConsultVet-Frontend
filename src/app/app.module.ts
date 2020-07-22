@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { NgxPaginationModule } from 'ngx-pagination';
 registerLocaleData(localeEs);
 
 import { AppRoutingModule } from './app-routing.module';
@@ -55,6 +56,7 @@ import { ClientInfoComponent } from './components/client-main/client-info/client
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgxPaginationModule
   ],
   providers: [
     ClientService,

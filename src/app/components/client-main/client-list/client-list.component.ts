@@ -11,12 +11,12 @@ import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
 })
 export class ClientListComponent implements OnInit {
 
-
+  actualPage: number = 1;
+  total: number =0;
   faEdit =faEdit;
   faTrash = faTrash;
   faInfo = faInfo;
   
-
   clients : Client[];
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
@@ -41,6 +41,7 @@ export class ClientListComponent implements OnInit {
       result=>{
         this.clients = result;
         this.reloadComplete.emit(true);
+        this.total = this.clients.length;
       }
     )
   }
