@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Pet } from '../../shared/models/pet';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Observable, of } from 'rxjs';
+import { retry } from 'rxjs/operators';
 
 
 
@@ -28,6 +29,13 @@ export class PetService {
     }else{
       return this.http.put(this.url.concat('/').concat(pet.idpet), petBody, this.httpOptions)
     }
+  }
+
+  retrieve(id: string):Observable<Pet>{
+    return this.http.get<Pet>(this.url.concat('/').concat('id'), this.httpOptions)
+    .pipe(
+      retry(1),
+    )
   }
 
   delete(id: string):Observable<any>{

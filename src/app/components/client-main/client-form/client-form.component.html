@@ -7,7 +7,6 @@
             <div class="col">
                 <mat-form-field apparience="legacy" class="formWidth" >
                     <mat-label>Nombre</mat-label>
-
                     <input matInput type="text" formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.lastname.errors }">
                     <mat-hint>Ej:. Paúl Andrés</mat-hint>
                     <mat-error *ngIf="f.name.hasError('required')&&submitted">
@@ -62,9 +61,6 @@
                 
                 <mat-form-field apparience="field" class="short-input formWidth">
                     
-                       
-    
-
                     <mat-label>Género</mat-label>
                     <mat-select [(ngModel)]="client.gender" formControlName="gender" [ngClass]="{'is-invalid': submitted && f.gender.errors }">
                         <mat-option value="Masculino">Masculino</mat-option>

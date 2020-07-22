@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Client } from '../../shared/models/client';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { retry, catchError, tap } from 'rxjs/operators';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
   url: string = 'https://consultoriovet-eb010.web.app/api/clients';
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -29,8 +28,14 @@ export class ClientService {
     } else {
       return this.http.put(this.url.concat('/').concat(client.idclient), clientBody, this.httpOptions)
     }
+  }
 
-  };
+  retrieve(id: string):Observable<Client>{
+    return this.http.get<Client>(this.url.concat('/').concat(id),this.httpOptions)
+    .pipe(
+      retry(1), 
+    );
+  }
 
   delete(id: string): Observable<any> {
     console.log(id);
@@ -43,11 +48,8 @@ export class ClientService {
   list(): Observable<Client[]> {
     return this.http.get<Client[]>(this.url, this.httpOptions)
       .pipe(
-        retry(1)
-        
+        retry(1)  
       )
   }
-
-
 
 }

@@ -23,9 +23,6 @@ export class ClientListComponent implements OnInit {
   @Output() clientToEdit = new EventEmitter<Client>();
   constructor(private clientService: ClientService) { }
 
-
-  
-
   ngOnInit(): void {
     this.list();
   }
