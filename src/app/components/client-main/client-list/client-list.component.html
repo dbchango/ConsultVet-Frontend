@@ -1,4 +1,23 @@
 <div class="container">
+    <mat-label>Opciones de consulta</mat-label>
+    <div class="row">
+        <mat-form-field class="col">
+            <mat-label>Numero de registros</mat-label>
+            <input matInput [(ngModel)]="querysize" type="number">
+        </mat-form-field>
+        <mat-form-field class="col">
+            <mat-label>Registro inicial</mat-label>
+            <input matInput [(ngModel)]="last" type="text">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <div class="btn-group col">
+            <button mat-button (click)="changeSize()" class="btn btn-success">Desplegar</button>
+        </div>
+    </div>
+    <!--Clients table-->    
+</div>
+<div class="container">
     <!--Clients table-->
     <table class="table table-hove">
         <thead>
@@ -9,7 +28,7 @@
             <td>Genero</td>
             <td></td>
         </thead>
-        <tr *ngFor='let client of clients | paginate: {itemsPerPage:10, currentPage: actualPage, totalItems: total }; let i = index'>
+        <tr *ngFor='let client of clients ; let i = index'>
             <td>{{ i+1 }}</td>
             <td>{{ client.lastname }}</td>
             <td>{{ client.name }}</td>
@@ -22,9 +41,9 @@
             </td>
         </tr>
     </table>
- 
-                      
-    <pagination-controls (pageChange)="actualPage=$event" previousLabel="Anterior" nextLabel="Siguiente">1</pagination-controls>
+    
+                        
+
     
 </div>
 

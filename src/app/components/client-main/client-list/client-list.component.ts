@@ -11,13 +11,19 @@ import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
 })
 export class ClientListComponent implements OnInit {
 
-  actualPage: number = 1;
-  total: number =0;
+//  actualPage: number = 1;
+
   faEdit =faEdit;
   faTrash = faTrash;
   faInfo = faInfo;
-  
   clients : Client[];
+  
+  querysize = 10;//array length
+  last: string;
+  pageEvent :Event;
+
+
+
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() clientToEdit = new EventEmitter<Client>();
@@ -35,13 +41,24 @@ export class ClientListComponent implements OnInit {
       }
     }
   }
-
+/*
   list(): void{
     this.clientService.list().subscribe(
       result=>{
         this.clients = result;
         this.reloadComplete.emit(true);
         this.total = this.clients.length;
+      }
+    )
+  }*/
+
+  list(): void{
+    this.clientService.listInterval( this.querysize, this.last).subscribe(
+      result =>{
+        console.log(result)
+        this.clients = result
+        this.reloadComplete.emit(true);
+        this.querysize = result.length
       }
     )
   }
@@ -91,6 +108,17 @@ export class ClientListComponent implements OnInit {
   update(client: Client): void{
     console.log('Client to edit '+client.idclient);
     this.clientToEdit.emit(client);
+  }
+
+  catchEvent($event): void{
+    this.pageEvent = $event; 
+    console.log(this.pageEvent)
+    console.log(this.querysize);
+  }
+
+  changeSize(): void{
+    console.log("Tamano: "+this.querysize+"Posicion inicial: "+this.last)
+    this.list()
   }
 
 }
