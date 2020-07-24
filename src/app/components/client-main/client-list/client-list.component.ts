@@ -4,6 +4,9 @@ import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
 
+
+
+
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
@@ -12,17 +15,20 @@ import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
 export class ClientListComponent implements OnInit {
 
 //  actualPage: number = 1;
-
+  width: number =0;
   faEdit =faEdit;
   faTrash = faTrash;
   faInfo = faInfo;
+  actualPage: number = 1;
   clients : Client[];
-  
+
+
   querysize = 10;//array length
-  last: string;
+  sizeOptions = [5, 10, 20, 30];//paginate options
+  last: any = 1 ;
   pageEvent :Event;
 
-
+  total: number =0;
 
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
@@ -41,16 +47,6 @@ export class ClientListComponent implements OnInit {
       }
     }
   }
-/*
-  list(): void{
-    this.clientService.list().subscribe(
-      result=>{
-        this.clients = result;
-        this.reloadComplete.emit(true);
-        this.total = this.clients.length;
-      }
-    )
-  }*/
 
   list(): void{
     this.clientService.listInterval( this.querysize, this.last).subscribe(
