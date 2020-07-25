@@ -74,7 +74,6 @@ export class ClientListComponent implements OnInit {
           <label>Direccion: </label><span>${client.direction}</span><br>
           <label>Genero: </label><span>${client.gender}</span><br>
           </fieldset>`,
-
     })
 
   }
