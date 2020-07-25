@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../../shared/models/client';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { retry } from 'rxjs/operators';
+import { Pet } from '../../shared/models/pet';
+import { Consult } from 'src/app/shared/models/consult';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,20 @@ export class ClientService {
       .pipe(
         retry(1)
       )
+  }
+
+  listClientPets(id: string):Observable<Pet[]>{
+    return this.http.get<Pet[]>(this.url.concat('/').concat(id).concat('/pets'), this.httpOptions)
+    .pipe(
+      retry(1),
+    )
+  }
+
+  listConsults(id: string): Observable<Consult[]>{
+    return this.http.get<Consult[]>(this.url.concat('/').concat(id).concat('/consults'), this.httpOptions)
+    .pipe(
+      retry(1),
+    )
   }
 
 }

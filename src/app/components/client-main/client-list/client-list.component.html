@@ -28,7 +28,7 @@
             <td>Genero</td>
             <td></td>
         </thead>
-        <tr *ngFor='let client of clients ; let i = index'>
+        <tr *ngFor="let client of clients ; let i = index">
             <td>{{ i+1 }}</td>
             <td>{{ client.lastname }}</td>
             <td>{{ client.name }}</td>
@@ -41,10 +41,6 @@
             </td>
         </tr>
     </table>
-    
-                        
-
-    
 </div>
 
 

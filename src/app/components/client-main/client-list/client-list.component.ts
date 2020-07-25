@@ -4,9 +4,6 @@ import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
 
-
-
-
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
@@ -21,13 +18,8 @@ export class ClientListComponent implements OnInit {
   faInfo = faInfo;
   actualPage: number = 1;
   clients : Client[];
-
-
-  querysize = 10;//array length
-  sizeOptions = [5, 10, 20, 30];//paginate options
+  querysize: number = 10;//array length
   last: any = 1 ;
-  pageEvent :Event;
-
   total: number =0;
 
   @Input() flagToReload = new Boolean;
@@ -75,7 +67,6 @@ export class ClientListComponent implements OnInit {
           <label>Genero: </label><span>${client.gender}</span><br>
           </fieldset>`,
     })
-
   }
   
   delete(client: Client): void{
@@ -103,12 +94,6 @@ export class ClientListComponent implements OnInit {
   update(client: Client): void{
     console.log('Client to edit '+client.idclient);
     this.clientToEdit.emit(client);
-  }
-
-  catchEvent($event): void{
-    this.pageEvent = $event; 
-    console.log(this.pageEvent)
-    console.log(this.querysize);
   }
 
   changeSize(): void{
