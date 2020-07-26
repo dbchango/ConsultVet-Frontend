@@ -86,7 +86,7 @@ export class PetListComponent implements OnInit {
   }
 
   update(pet: Pet):void{
-    console.log('Pet to edit: '+pet.idpet);
+    //console.log('Pet to edit: '+pet.idpet);
     this.petToEdit.emit(pet);
   }
 

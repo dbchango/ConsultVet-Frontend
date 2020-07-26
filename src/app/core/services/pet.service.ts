@@ -32,7 +32,7 @@ export class PetService {
   }
 
   retrieve(id: string):Observable<Pet>{
-    return this.http.get<Pet>(this.url.concat('/').concat('id'), this.httpOptions)
+    return this.http.get<Pet>(this.url.concat('/').concat(id), this.httpOptions)
     .pipe(
       retry(1),
     )
@@ -51,5 +51,7 @@ export class PetService {
      
     )
   }
+
+
 
 }

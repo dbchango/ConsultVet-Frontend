@@ -5,13 +5,12 @@
             <div class="col">
                 <mat-form-field apparience="legacy" class="formWidth" >
                     <mat-label>Nombre</mat-label>
-                    <input matInput type="text" formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.lastname.errors }">
+                    <input matInput type="text" formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.name.errors }">
                     <mat-hint>Ej:. Paúl Andrés</mat-hint>
                     <mat-error *ngIf="f.name.hasError('required')&&submitted">
                         El nombre es requerido
                     </mat-error>
                 </mat-form-field>
-                
             </div>
             <div class="col">
                 <mat-form-field apparience="fill" class="short-input formWidth" >
@@ -21,7 +20,6 @@
                         El Apellido es requerido
                     </mat-error>
                 </mat-form-field>
-                
             </div>
         </div>
         <div class="row">
@@ -45,6 +43,8 @@
                 </mat-form-field>
             </div>  
         </div>
+
+
         <div class="row">
             <div class="col">
                 <mat-form-field apparience="field" class="short-input formWidth">

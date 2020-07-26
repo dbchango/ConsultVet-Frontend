@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from '../../../core/services/pet.service';
 import { Pet } from '../../../shared/models/pet';
@@ -29,6 +28,7 @@ export class PetFormComponent implements OnInit {
   @Input() pet : Pet;
   @Input() title: string;
   @Output() flagToReaload = new EventEmitter<Boolean>();
+  @Output() flagReset = new EventEmitter<Boolean>();
 
   constructor(private petService : PetService, private formBuilder: FormBuilder) { }
 
@@ -38,9 +38,8 @@ export class PetFormComponent implements OnInit {
       name: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       type: ['', [Validators.required]],
-      age: ['', [Validators.required]],
-      color: ['', [Validators.required]],
-      idclient: ['', [Validators.required]],
+      age: ['', []],
+      color: ['', []]
     })
   }
 
@@ -52,6 +51,7 @@ export class PetFormComponent implements OnInit {
   onReset():void{
     this.submitted = false;
     this.formPet.reset();
+    this.flagReset.emit(true);
   }
 
   onSubmit(): void{

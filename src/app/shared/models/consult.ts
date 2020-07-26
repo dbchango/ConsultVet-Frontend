@@ -12,6 +12,4 @@ export class Consult {
     idclient: string;
     pet: Pet;
     client: Client;
-
-
 }

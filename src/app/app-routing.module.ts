@@ -13,6 +13,8 @@ const routes: Routes = [
   {path: 'petlist', component: PetListComponent},
   {path: 'client/:id', component: ClientInfoComponent},  
   {path: 'pet/:id', component: PetInfoComponent},  
+  
+
 ];
 
 @NgModule({

@@ -17,6 +17,7 @@
     </div>
     <!--Clients table-->    
 </div>
+
 <div class="container">
     <!--Clients table-->
     <table class="table table-hove">
@@ -27,19 +28,22 @@
             <td>Cedula</td>
             <td>Genero</td>
             <td></td>
+            <td></td>
+            <td></td>
         </thead>
-        <tr *ngFor="let client of clients ; let i = index">
-            <td>{{ i+1 }}</td>
-            <td>{{ client.lastname }}</td>
-            <td>{{ client.name }}</td>
-            <td>{{ client.ci }}</td>
-            <td>{{ client.gender }}</td>
-            <td>
-                <button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/client', client.idclient]"><fa-icon [icon]="faInfo"></fa-icon></button>
-                <button mat-button class="btn btn-sm btn-warning btntable" (click)="update(client)"><fa-icon [icon]="faEdit"></fa-icon></button>
-                <button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(client)"><fa-icon [icon]="faTrash"></fa-icon></button>
-            </td>
-        </tr>
+        <tbody>
+            <tr *ngFor="let client of clients ; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ client.lastname }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.ci }}</td>
+                <td>{{ client.gender }}</td>
+                <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/client', client.idclient]"><mat-icon>info</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(client)"><mat-icon>update</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(client)"><mat-icon>clear</mat-icon></button></td>
+            </tr>
+        </tbody>
+        
     </table>
 </div>
 

@@ -10,17 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PetInfoComponent implements OnInit {
   pet = new Pet;
-  
 
   constructor(private petService: PetService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(
-      params=>{
+      params=>{     
         if(params['id']){
           this.petService.retrieve(params['id'])
           .subscribe(result=> {
             this.pet = result
+            console.log(this.pet)
     
           })
         }

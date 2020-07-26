@@ -30,7 +30,10 @@ import {MaterialModule } from './material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { ClientInfoComponent } from './components/client-main/client-info/client-info.component';
-
+import { ClientPetsComponent, ClientPetEditDialog } from './components/client-main/client-info/client-pets/client-pets.component';
+import { ClientConsultsComponent } from './components/client-main/client-info/client-consults/client-consults.component';
+import { PetVaccinesComponent } from './components/pet-main/pet-info/pet-vaccines/pet-vaccines.component';
+import { ConsultService } from './core/services/consult.service'
 
 @NgModule({
   declarations: [
@@ -45,7 +48,12 @@ import { ClientInfoComponent } from './components/client-main/client-info/client
     ConsultFormComponent,
     ConsultListComponent,
     PetInfoComponent,
-    ClientInfoComponent
+    ClientInfoComponent,
+    ClientPetsComponent,
+    ClientPetEditDialog,
+    ClientConsultsComponent,
+    PetVaccinesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,7 @@ import { ClientInfoComponent } from './components/client-main/client-info/client
   providers: [
     ClientService,
     PetService,
+    ConsultService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: HTTP_INTERCEPTORS,
       useClass: ServiceInterceptor, 

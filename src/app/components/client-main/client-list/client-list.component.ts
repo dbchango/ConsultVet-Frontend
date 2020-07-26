@@ -3,6 +3,7 @@ import { ClientService } from '../../../core/services/client.service';
 import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-client-list',
@@ -10,7 +11,7 @@ import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-
+  queryForm :FormGroup;
 //  actualPage: number = 1;
   width: number =0;
   faEdit =faEdit;
@@ -25,13 +26,16 @@ export class ClientListComponent implements OnInit {
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() clientToEdit = new EventEmitter<Client>();
-  constructor(private clientService: ClientService) { }
+  
+  constructor(private clientService: ClientService, private myForm:FormBuilder) { }
 
   ngOnInit(): void {
     this.list();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+
+
+  ngOnChanges(changes: SimpleChanges){
     if(changes.flagToReload.currentValue){
       console.log('Flag changed to: '+this.flagToReload);
       if(this.flagToReload){

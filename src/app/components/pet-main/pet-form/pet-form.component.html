@@ -58,14 +58,7 @@
                             No ha seleccionado una especie
                         </mat-error>
                     </mat-form-field>
-                    <!--Id Dueno Type-->
-                    <mat-form-field apparience="legacy" class="formWidth">
-                        <mat-label>Dueño</mat-label>
-                        <input placeholder="Dueño" matInput type="text" min=0 formControlName="idclient" [(ngModel)]="pet.idclient" [ngClass]="{'is-invalid': submitted && f.idclient.errors }">
-                        <mat-error *ngIf="f.idclient.hasError('required')&&submitted">
-                            No ha ingresado la edad
-                        </mat-error>
-                    </mat-form-field>
+
                     <!--Botones-->
                     <div class="btn-group">
                         <button type="submit" class="btn btn-success">
@@ -73,8 +66,6 @@
                         <button type="reset" (click)="onReset()" class="btn btn-danger">
                             <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
                     </div>
-                    <button mat-raised-button type="reset" (click)="onReset()" color="primary"><fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
-                        <button mat-raised-button type="reset" (click)="onReset()" color="warn"><fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
                 </div>
             </div>
         </form>

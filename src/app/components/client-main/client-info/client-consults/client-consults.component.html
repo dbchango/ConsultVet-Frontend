@@ -1,0 +1,23 @@
+<p>client-consults works!</p>
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Fecha</td>
+            <td>Responsable</td>
+            <td>Precio</td>
+            <td>Estado</td>
+            <td></td>
+            <td><button mat-button class="btn btn-sm btn-info"><mat-icon>add</mat-icon></button></td>
+        </thead>
+        <tr *ngFor="let consult of consults; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ consult.date }}</td>
+            <td>{{ consult.responsable }}</td>
+            <td>{{ consult.price }}</td>
+            <td>{{ consult.status }}</td>
+            <td> <button mat-button class="btn btn-sm btn-warning" (click)="update(consult)"><mat-icon>update</mat-icon></button></td> 
+            <td><button mat-button class="btn btn-sm btn-danger" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
+        </tr>
+    </table>
+</div>
