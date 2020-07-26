@@ -54,7 +54,7 @@ export class ClientService {
       )
   }
 
-  listInterval(limit: number, last:any): Observable<Client[]>{
+  listInterval(limit: number, last:number): Observable<Client[]>{
     let lim = String(limit);
     let las = String(last);
     return this.http.get<Client[]>(this.url.concat('/interval/').concat(lim).concat('/').concat(las), this.httpOptions)

@@ -1,23 +1,23 @@
 <div class="container">
-    <mat-label>Opciones de consulta</mat-label>
+    <mat-label>Opciones de consulta</mat-label><br>
+    
     <div class="row">
         <mat-form-field class="col">
             <mat-label>Numero de registros</mat-label>
-            <input matInput [(ngModel)]="querysize" type="number">
+            <input matInput min=0 [(ngModel)]="querysize" type="number">
         </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>Registro inicial</mat-label>
-            <input matInput [(ngModel)]="last" type="text">
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <div class="btn-group col">
+        <div class=" align-center col-2">
             <button mat-button (click)="changeSize()" class="btn btn-success">Desplegar</button>
         </div>
-    </div>
+        <div class=" align-center col-2">
+            <button mat-button (click)="before()" class="btn btn-success">Anterior</button>
+        </div>
+        <div class=" align-center col-2">
+            <button mat-button (click)="next()" class="btn btn-success">Siguiente</button>
+        </div>
+    </div><br>
     <!--Clients table-->    
 </div>
-
 <div class="container">
     <!--Clients table-->
     <table class="table table-hove">

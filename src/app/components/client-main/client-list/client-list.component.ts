@@ -3,7 +3,7 @@ import { ClientService } from '../../../core/services/client.service';
 import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-client-list',
@@ -11,30 +11,25 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-  queryForm :FormGroup;
-//  actualPage: number = 1;
-  width: number =0;
   faEdit =faEdit;
   faTrash = faTrash;
   faInfo = faInfo;
   actualPage: number = 1;
   clients : Client[];
   querysize: number = 10;//array length
-  last: any = 1 ;
-  total: number =0;
+  last: number;
+  
 
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() clientToEdit = new EventEmitter<Client>();
   
-  constructor(private clientService: ClientService, private myForm:FormBuilder) { }
+  constructor(private clientService: ClientService, private Group:FormBuilder) { }
 
   ngOnInit(): void {
+  this.last=0;
     this.list();
   }
-
-
-
   ngOnChanges(changes: SimpleChanges){
     if(changes.flagToReload.currentValue){
       console.log('Flag changed to: '+this.flagToReload);
@@ -45,12 +40,11 @@ export class ClientListComponent implements OnInit {
   }
 
   list(): void{
-    this.clientService.listInterval( this.querysize, this.last).subscribe(
+    this.clientService.listInterval(this.querysize, this.last).subscribe(
       result =>{
         console.log(result)
         this.clients = result
         this.reloadComplete.emit(true);
-        this.querysize = result.length
       }
     )
   }
@@ -101,8 +95,25 @@ export class ClientListComponent implements OnInit {
   }
 
   changeSize(): void{
-    console.log("Tamano: "+this.querysize+"Posicion inicial: "+this.last)
+    this.last=0;
     this.list()
+  }
+
+  next(){
+    
+    if(this.clients.length<this.querysize){
+      return;
+    }
+    this.last = this.last + this.querysize;
+    this.list();
+  }
+  
+  before(){
+    if(this.clients.length===0||this.last===0){
+      return;
+    }
+    this.last = this.last - this.querysize;
+    this.list();  
   }
 
 }
