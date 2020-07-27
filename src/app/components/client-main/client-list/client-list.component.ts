@@ -14,10 +14,10 @@ export class ClientListComponent implements OnInit {
   faEdit =faEdit;
   faTrash = faTrash;
   faInfo = faInfo;
-  actualPage: number = 1;
   clients : Client[];
   querysize: number = 10;//array length
-  last: number;
+  last: number;//valor a partir del cual se realizara la connsulta
+  actualPage: number = 1;
   
 
   @Input() flagToReload = new Boolean;
@@ -39,7 +39,7 @@ export class ClientListComponent implements OnInit {
     }
   }
 
-  list(): void{
+  list(): boolean{
     this.clientService.listInterval(this.querysize, this.last).subscribe(
       result =>{
         console.log(result)
@@ -47,6 +47,7 @@ export class ClientListComponent implements OnInit {
         this.reloadComplete.emit(true);
       }
     )
+    return true;
   }
 
   retrieve(client: Client): void{
@@ -100,12 +101,14 @@ export class ClientListComponent implements OnInit {
   }
 
   next(){
-    
     if(this.clients.length<this.querysize){
       return;
     }
     this.last = this.last + this.querysize;
-    this.list();
+    if(this.list()){
+      this.actualPage++;
+    }
+
   }
   
   before(){
@@ -113,7 +116,10 @@ export class ClientListComponent implements OnInit {
       return;
     }
     this.last = this.last - this.querysize;
-    this.list();  
+    if(this.list()){
+      this.actualPage--;
+    }
+    
   }
 
 }
