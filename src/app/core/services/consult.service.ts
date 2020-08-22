@@ -10,7 +10,7 @@ import { retry } from 'rxjs/operators';
 })
 export class ConsultService {
 
-  url: string = 'https://consultoriovet-eb010.web.app/api/pets';
+  url: string = 'https://consultoriovet-eb010.web.app/api/consults';
 
   httpOptions = {
     headers: new HttpHeaders({

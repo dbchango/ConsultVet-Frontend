@@ -9,7 +9,7 @@
             </mat-card>
         </div>
         <div class="col">
-            <mat-label>Apellidos</mat-label>
+            <mat-label>Edad</mat-label>
             <mat-card class="bg bg-light">
                 <p class="h6"><strong>{{pet.age}}</strong></p>
             </mat-card>
@@ -17,7 +17,7 @@
     </div><br><mat-divider></mat-divider>
     <div class="row">
         <div class="col">
-            <mat-label>Direccion</mat-label>
+            <mat-label>Color</mat-label>
             <mat-card class="bg bg-light">
                 <p class="h6"><strong>{{pet.color}}</strong></p>
             </mat-card>
@@ -25,13 +25,13 @@
     </div><br><mat-divider></mat-divider>
     <div class="row">
         <div class="col">
-            <mat-label>Cedula</mat-label>
+            <mat-label>Sexo</mat-label>
             <mat-card class="bg bg-light">
                 <p class="h6"><strong>{{pet.sex}}</strong></p>
             </mat-card>
         </div>
         <div class="col">
-            <mat-label>Telefono</mat-label>
+            <mat-label>Tipo</mat-label>
             <mat-card class="bg bg-light">
                 <p class="h6"><strong>{{pet.type}}</strong></p>
             </mat-card>
@@ -39,6 +39,8 @@
     </div><br><mat-divider></mat-divider>
     
 </div><br><br>
+
+<app-pet-vaccines [vaccines]="vaccines" ></app-pet-vaccines>
 <!--Mascotas del
     <div class="container">
     <mat-card-title>{{ client.name |titlecase}} {{ client.lastname|titlecase }}</mat-card-title>

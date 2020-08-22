@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, Inject, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { Pet } from 'src/app/shared/models/pet';
 import { PetService } from 'src/app/core/services/pet.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import { ClientService } from 'src/app/core/services/client.service';
 export class ClientPetsComponent implements OnInit {
   @Input() flagToQuery: Boolean;
   pets: Pet[];
+  @Output() petsout = new EventEmitter<Pet[]>();
   @Input() clientid: string;
 
   constructor(private petService: PetService, public dialog: MatDialog, private clientService: ClientService) { }
@@ -24,11 +25,11 @@ export class ClientPetsComponent implements OnInit {
     }
   }
 
-
   listPets(id: string): void{
     this.clientService.listClientPets(id).subscribe(
       result=>{
         this.pets = result
+        this.petsout.emit(this.pets)
         //console.log(result);
       }
     )
@@ -108,9 +109,7 @@ export class ClientPetEditDialog{
         console.log(this.flagToReload)
         this.dialogRef.close();
       }
-    }
-
-  
+    } 
 }
 
 

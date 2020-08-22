@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pet } from '../../../shared/models/pet';
 import { PetService } from '../../../core/services/pet.service';
 import { ActivatedRoute } from '@angular/router';
+import { Vaccine } from 'src/app/shared/models/vaccine';
 
 @Component({
   selector: 'app-pet-info',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PetInfoComponent implements OnInit {
   pet = new Pet;
-
+  vaccines : Vaccine[];
   constructor(private petService: PetService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -20,6 +21,8 @@ export class PetInfoComponent implements OnInit {
           this.petService.retrieve(params['id'])
           .subscribe(result=> {
             this.pet = result
+            this.pet.idpet=params['id'];
+            this.listVaccines(params['id']);
             console.log(this.pet)
     
           })
@@ -27,5 +30,14 @@ export class PetInfoComponent implements OnInit {
       }
     );
     
+  }
+
+  listVaccines(id: string){
+    this.petService.listVaccines(id).subscribe(
+      result=>{
+        this.vaccines = result;
+        console.warn(result);
+      }
+    )
   }
 }

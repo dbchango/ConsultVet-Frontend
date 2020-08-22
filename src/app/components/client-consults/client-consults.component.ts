@@ -4,13 +4,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import Swal from 'sweetalert2';
 import { ClientService } from 'src/app/core/services/client.service';
 import { ConsultService } from 'src/app/core/services/consult.service';
+import { Pet } from 'src/app/shared/models/pet';
 @Component({
   selector: 'app-client-consults',
   templateUrl: './client-consults.component.html',
   styleUrls: ['./client-consults.component.css']
 })
 export class ClientConsultsComponent implements OnInit {
-
+  //@Input() pets: Pet[];
   @Input() clientid: string;
   @Input() flagToQuery: Boolean;
   consults: Consult[];
@@ -36,7 +37,7 @@ export class ClientConsultsComponent implements OnInit {
     this.listConsults(this.clientid);
   }
 
-  update(consult: Consult){
+  update(consult: Consult):void{
     const dialogRef = this.dialog.open(ClientConsultsEditDialog,
       {
         width: "800",
@@ -52,10 +53,28 @@ export class ClientConsultsComponent implements OnInit {
                 client: consult.client
               }
       })
+      dialogRef.afterClosed().subscribe(
+        result=>{
+          console.log(result)//undefined por el momento 
+        }
+      )
   }
 
-  create(){
-    
+  create():void{
+    let consult = new Consult;
+    const dialogRef = this.dialog.open(ClientConsultsEditDialog,
+      {
+        width: '700px',
+        data: {idconsult: consult.idconsult,
+              date: consult.date,
+              observation: consult.observation,
+              price:  consult.price,
+              responsable: consult.responsable,
+              status: consult.status,
+              idclient: this.clientid,
+       
+        }
+      })
   }
 
 

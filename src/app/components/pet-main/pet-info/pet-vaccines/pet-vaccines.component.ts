@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Vaccine } from 'src/app/shared/models/vaccine';
 
 @Component({
   selector: 'app-pet-vaccines',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetVaccinesComponent implements OnInit {
 
+  @Input() vaccines: Vaccine[];
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  list(id: string): void{
-    
-  }
+  
 
 }

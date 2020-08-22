@@ -1,1 +1,21 @@
-<p>pet-vaccines works!</p>
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Fecha</td>
+            <td>Responsable</td>
+            <td>Nombre</td>
+            <td>Observación</td>
+            <td></td>
+            
+        </thead>
+        <tr *ngFor="let vaccine of vaccines; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ vaccine.date }}</td>
+            <td>{{ vaccine.responsable }}</td>
+            <td>{{ vaccine.name }}</td>
+            <td>{{ vaccine.observation }}</td>
+           
+        </tr>
+    </table>
+</div>

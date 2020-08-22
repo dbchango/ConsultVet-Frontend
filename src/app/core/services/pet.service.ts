@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pet } from '../../shared/models/pet';
+import { Vaccine } from '../../shared/models/vaccine';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Observable, of } from 'rxjs';
 import { retry } from 'rxjs/operators';
@@ -51,6 +52,15 @@ export class PetService {
      
     )
   }
+
+  listVaccines(id: string):Observable<Vaccine[]>{
+    return this.http.get<Vaccine[]>(this.url.concat('/').concat(id).concat('/vaccines'), this.httpOptions)
+    .pipe(
+      retry(1)
+    )
+  }
+
+
 
 
 

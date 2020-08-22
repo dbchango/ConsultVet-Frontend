@@ -20,10 +20,15 @@
     <mat-menu #menuClient="matMenu">
       <button mat-menu-item routerLink="/client">Registrar nuevo cliente</button>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="menuPet">Mascotas</button>
+    <button mat-button [matMenuTriggerFor]="menuPet" >Mascotas</button>
     <mat-menu #menuPet="matMenu">
-      <button mat-menu-item routerLink="/pet">Registrar nueva mascota</button>
+      <button mat-menu-item routerLink="/petlist">Listado de mascotas</button>
     </mat-menu>
+    <button mat-button [matMenuTriggerFor]="menuConsult">Consultas</button>
+    <mat-menu #menuConsult="matMenu">
+      <button mat-menu-item routerLink="/consultmain">Agendar Consultas</button>
+    </mat-menu>
+    
     <div class="spacer"></div>
 </mat-toolbar>
 
@@ -34,6 +39,7 @@
 <div class="container">
   <div class="w-100 h-100">
     <router-outlet></router-outlet>
+    
   </div>
 </div>  
   <!-- Footer -->

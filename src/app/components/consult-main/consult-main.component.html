@@ -1,7 +1,18 @@
-<div class="container">
-    <app-consult-form></app-consult-form>
-    
-    
-    <app-consult-list></app-consult-list>
 
+
+<div class="container">
+    <!--Client component table-->
+    <mat-tab-group dynamicWidth dynamicHeight mat-align-tabs="center">
+        <mat-tab label="Formulario de Cliente">
+            <div class=" mat-elevation-z4">
+                <app-consult-form [title]="mainTitle" [consult]="mainConsult" (flagToReaload)="reloadToDo($event)"></app-consult-form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Lista de Clientes">
+            <div class=" mat-elevation-z4">
+                <app-consult-list [flagToReload]="mainReload" (consultToEdit)="mainUpdate($event)" (reloadComplete)="reloadDone($event)"></app-consult-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>
+

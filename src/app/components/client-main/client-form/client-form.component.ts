@@ -29,9 +29,7 @@ export class ClientFormComponent implements OnInit {
   @Output() flagToReload = new EventEmitter<Boolean>();//Bandera de estado del formulario que se enviara al padre
   submitted = false;//indica si el registro se proceso con exito
   constructor(private clientService: ClientService, private formBuilder: FormBuilder) { }
-
   
-
   ngOnInit(): void {
     this.formClient = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -54,7 +52,7 @@ export class ClientFormComponent implements OnInit {
   }
 
   onSubmit(): void{
-    
+   // this.settingForm();
     this.submitted = true;
     if(this.formClient.invalid){
       console.log('Invalid Form');
@@ -63,7 +61,7 @@ export class ClientFormComponent implements OnInit {
     
     this.clientService.save(this.client).subscribe(
       result=>{
-        console.log(result);
+        //console.log(result);
         this.submitted = false;
         console.log(this.formClient);
         if(result.icon === "success"){
@@ -72,10 +70,24 @@ export class ClientFormComponent implements OnInit {
           this.flagToReload.emit(true);
           return;
         }
-        Swal.fire(result);
+        //Swal.fire(result);
       }
       
     )
     
   }
+
+  settingForm(){
+
+   this.client.name =  this.formClient.get('name').value
+   this.client.lastname =  this.formClient.get('lastname').value  
+   this.client.ci =  this.formClient.get('ci').value
+   this.client.phone =  this.formClient.get('phone').value 
+   this.client.borndate =  this.formClient.get('borndate').value
+   this.client.direction =  this.formClient.get('direction').value
+   this.client.gender =  this.formClient.get('gender').value
+
+  }
+
+
 }

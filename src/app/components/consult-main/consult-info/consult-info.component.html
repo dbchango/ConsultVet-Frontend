@@ -1,0 +1,43 @@
+<!--Client info -->
+<div class="container">
+    <mat-card-title>Registro con el id: {{ consult.idconsult |titlecase}} </mat-card-title>
+    <div class="row">
+        <div class="col">
+            <mat-label>Fecha</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6">{{consult.date}}</p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Responsable</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{consult.responsable}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Precio</mat-label>
+            <mat-card>
+                <p class="h6">{{ consult.price }}</p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Cliente</mat-label>
+            <mat-card>
+                <p class="h6">{{ consult.client.name }}</p>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-label>Observacion</mat-label>
+            <mat-card>
+                <p class="h6">{{ consult.observation }}</p>
+            </mat-card>
+        </div>
+    </div>
+    
+   
+    
+</div><br><br>

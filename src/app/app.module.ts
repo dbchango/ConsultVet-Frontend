@@ -30,10 +30,13 @@ import {MaterialModule } from './material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { ClientInfoComponent } from './components/client-main/client-info/client-info.component';
-import { ClientPetsComponent, ClientPetEditDialog } from './components/client-main/client-info/client-pets/client-pets.component';
-import { ClientConsultsComponent } from './components/client-main/client-info/client-consults/client-consults.component';
+import { ClientPetsComponent, ClientPetEditDialog } from './components/client-pets/client-pets.component';
+import { ClientConsultsComponent, ClientConsultsEditDialog } from './components/client-consults/client-consults.component';
 import { PetVaccinesComponent } from './components/pet-main/pet-info/pet-vaccines/pet-vaccines.component';
-import { ConsultService } from './core/services/consult.service'
+import { ConsultService } from './core/services/consult.service';
+import { ConsultInfoComponent } from './components/consult-main/consult-info/consult-info.component';
+import { ScheduleConsultComponent } from './components/schedule-consult/schedule-consult.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form/sign-up-form.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +56,10 @@ import { ConsultService } from './core/services/consult.service'
     ClientPetEditDialog,
     ClientConsultsComponent,
     PetVaccinesComponent,
+    ConsultInfoComponent,
+    ScheduleConsultComponent,
+    ClientConsultsEditDialog,
+    SignUpFormComponent
     
   ],
   imports: [

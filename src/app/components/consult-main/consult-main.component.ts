@@ -8,21 +8,24 @@ import { Consult } from 'src/app/shared/models/consult';
 })
 export class ConsultMainComponent implements OnInit {
   mainReload: Boolean;
-  //mainTitle: string;
+  mainTitle: String;
   mainConsult: Consult;
   constructor() { }
 
   ngOnInit(): void {
     this.mainReload = false;
     this.onInit();
-
+    console.warn(this.mainConsult)
   }
 
   onInit(){
     this.mainConsult = new Consult;
-    //this.mainTitle = "Registro de una nuevo consulta";
+    this.mainTitle = "Registro de una nuevo consulta";
   }
 
+  reloadDone($event){
+    this.mainReload = !$event;
+  }
   reloadToDo($event){
     this.mainReload = $event;
     if(this.mainReload){
@@ -33,6 +36,7 @@ export class ConsultMainComponent implements OnInit {
 
   mainUpdate($event){
     this.mainConsult = $event;
+    this.mainTitle = "Actualizar el registro de "+$event.idconsult;
   }
 
   

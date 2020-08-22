@@ -3,7 +3,6 @@ import { ClientService } from '../../../core/services/client.service';
 import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-client-list',
@@ -24,7 +23,7 @@ export class ClientListComponent implements OnInit {
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() clientToEdit = new EventEmitter<Client>();
   
-  constructor(private clientService: ClientService, private Group:FormBuilder) { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
   this.last=0;
@@ -108,7 +107,6 @@ export class ClientListComponent implements OnInit {
     if(this.list()){
       this.actualPage++;
     }
-
   }
   
   before(){

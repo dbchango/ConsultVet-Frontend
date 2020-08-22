@@ -1,8 +1,6 @@
 <div>
-
     <div mat-dialog-content class="container">
         <h3 mat-dialog-title>Registro de: {{ data.idconsult }}</h3>
-        
+        <app-consult-form [consult]="data" (flagToReaload)="reloadToDo($event)" (flagReset)="reloadToDo($event)" ></app-consult-form>
     </div>
-
 </div>
