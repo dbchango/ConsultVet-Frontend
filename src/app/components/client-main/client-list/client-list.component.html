@@ -1,49 +1,60 @@
 <div class="container">
     <mat-label>Opciones de consulta</mat-label><br>
     <div class="row">
-        <mat-form-field class="col">
+        
             <mat-label>Numero de registros</mat-label>
-            <input matInput min=0 [(ngModel)]="querysize" type="number">
-        </mat-form-field>
-        <div class=" align-center col-2">
-            <button mat-button (click)="changeSize()" class="btn btn-success">Desplegar</button>
-        </div>
-        <div class=" align-center col-2">
-            <button mat-button (click)="before()" class="btn btn-success">Anterior</button>
-        </div>
-        <div class=" align-center col-2">
-            <button mat-button (click)="next()" class="btn btn-success">Siguiente</button>
-        </div>
+            <select [value]="limit" (change)="changeLimit($event)">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+            </select>
+
     </div><br>
     <!--Clients table-->    
 </div>
 <div class="container">
     <!--Clients table-->
-    <table class="table table-hove">
+    <table class="table table-hovered">
         <thead>
             <td>No.</td>
             <td>Apellidos</td>
             <td>Nombres</td>
             <td>Cédula</td>
             <td>Género</td>
+            <td>Phone</td>
             <td></td>
             <td></td>
             <td></td>
         </thead>
         <tbody>
-            <tr *ngFor="let client of clients ; let i = index">
-                <td>{{ i+1 }}</td>
+            <tr *ngFor="let client of clients; let i = index" >
+                <td>{{i | masmas:(currentPage - 1) * limit + 1}}</td>
                 <td>{{ client.lastname }}</td>
                 <td>{{ client.name }}</td>
                 <td>{{ client.ci }}</td>
                 <td>{{ client.gender }}</td>
+                <td>{{ client.phone }}</td>
                 <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/client', client.idclient]"><mat-icon>info</mat-icon></button></td>
                 <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(client)"><mat-icon>update</mat-icon></button></td>
                 <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(client)"><mat-icon>clear</mat-icon></button></td>
             </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" (click)="loadPage(1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          <li class="page-item" *ngFor="let pg of pages"><button class="page-link" (click)="loadPage(pg)">{{pg}}</button></li>              
+          <li class="page-item">
+            <button class="page-link" (click)="loadPage(numberPages)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
 </div>
-<div class="center">Página {{ actualPage }}</div>
 
 

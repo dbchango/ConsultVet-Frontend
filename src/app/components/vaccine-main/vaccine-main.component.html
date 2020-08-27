@@ -1,0 +1,16 @@
+
+<div class="container">
+    <!--Client component table-->
+    <mat-tab-group dynamicWidth dynamicHeight mat-align-tabs="center">
+        <mat-tab label="Formulario de vacunas">
+            <div class=" mat-elevation-z4">
+                <app-vaccine-form [title]="mainTitle" [vaccine]="mainVacccine" (flagToReload)="reloadToDo($event)" ></app-vaccine-form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Lista de vacunas">
+            <div class=" mat-elevation-z4">
+                <app-vaccine-query  [flagToReload]="mainReload" (vaccineToEdit)="mainUpdate($event)" (reloadComplete)="reloadDone($event)"></app-vaccine-query>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

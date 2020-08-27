@@ -39,12 +39,13 @@ export class ClientPetsComponent implements OnInit {
     const dialogRef = this.dialog.open(ClientPetEditDialog, 
       {
         width: '700px', 
-        data:  {idpet: pet.idpet, name: pet.name, color: pet.color, age: pet.age, sex: pet.sex, type: pet.type, idclient: pet.idclient } 
+        data:  {idpet: pet.idpet, name: pet.name, color: pet.color, age: pet.age, sex: pet.sex, type: pet.type, idclient: pet.idclient, vaccines: pet.vaccines } 
       });
       
       dialogRef.afterClosed().subscribe(
         result=>{
           console.log(result)//undefined por el momento 
+          this.listPets(this.clientid);
         }
       )
   }
@@ -54,12 +55,13 @@ export class ClientPetsComponent implements OnInit {
     const dialogRef = this.dialog.open(ClientPetEditDialog, 
       {
         width: '700px', 
-        data:  {idpet: pet.idpet,name: pet.name, color: pet.color, age: pet.age, sex: pet.sex, type: pet.type, idclient: this.clientid } 
+        data:  {idpet: pet.idpet,name: pet.name, color: pet.color, age: pet.age, sex: pet.sex, type: pet.type, idclient: this.clientid, vaccines: pet.vaccines } 
       });
       
       dialogRef.afterClosed().subscribe(
         result=>{
           console.log(result)//undefined por el momento 
+          this.listPets(this.clientid);
         }
       )
   }
@@ -79,6 +81,7 @@ export class ClientPetsComponent implements OnInit {
         this.petService.delete(pet.idpet).subscribe(
           result=>{
             Swal.fire(result);
+            this.listPets(this.clientid);
           }
         )
       }

@@ -56,17 +56,8 @@
 <div class="container">
     <mat-card-title>{{ "Listado de Mascotas"|titlecase }}</mat-card-title>
     <div class="row">
-        
         <div class="col">
             <app-client-pets (petsout)="getPets($event)" [clientid]="clientid"  [flagToQuery]="flagToQuery"></app-client-pets>
         </div>
     </div><br><br>
-    <mat-card-title>{{ "Listado de Consultas"|titlecase }}</mat-card-title>
-    <div class="row">
-        
-        <div class="col">
-            <app-client-consults  [clientid]="clientid" [flagToQuery]="flagToQuery"></app-client-consults>
-        </div>
-    </div>
-  
 </div>

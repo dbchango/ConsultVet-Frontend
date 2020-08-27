@@ -1,6 +1,6 @@
 <!--Client info -->
 <div class="container">
-    <mat-card-title>Registro con el id: {{ consult.idconsult |titlecase}} </mat-card-title>
+    <mat-card-title>Consulta de: {{ consult.pet.name |titlecase}} </mat-card-title>
     <div class="row">
         <div class="col">
             <mat-label>Fecha</mat-label>
@@ -11,7 +11,7 @@
         <div class="col">
             <mat-label>Responsable</mat-label>
             <mat-card class="bg bg-light">
-                <p class="h6"><strong>{{consult.responsable}}</strong></p>
+                <p class="h6"><strong>Mdc. {{consult.veterinary.lastname}} {{consult.veterinary.name}}</strong></p>
             </mat-card>
         </div>
     </div><br><mat-divider></mat-divider>
@@ -25,10 +25,10 @@
         <div class="col">
             <mat-label>Cliente</mat-label>
             <mat-card>
-                <p class="h6">{{ consult.client.name }}</p>
+                <p class="h6">{{ consult.pet.client.lastname }} {{ consult.pet.client.name }} </p>
             </mat-card>
         </div>
-    </div>
+    </div><br><mat-divider></mat-divider>
     <div class="row">
         <div class="col">
             <mat-label>Observacion</mat-label>
@@ -36,8 +36,11 @@
                 <p class="h6">{{ consult.observation }}</p>
             </mat-card>
         </div>
-    </div>
-    
-   
-    
+        <div class="col-3">
+            <mat-label>Estado</mat-label>
+            <mat-card>
+                <p class="h6">{{ consult.status }}</p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider> 
 </div><br><br>

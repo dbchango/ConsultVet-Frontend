@@ -4,7 +4,7 @@ import { PetService } from '../../../core/services/pet.service';
 import { Pet } from '../../../shared/models/pet';
 import Swal from 'sweetalert2';
 import { faQuoteLeft, faIdCard, faVenusMars, faCalendarDay,   faSave, faBackspace, faDog } from '@fortawesome/free-solid-svg-icons'
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-pet-form',
   templateUrl: './pet-form.component.html',
@@ -25,15 +25,41 @@ export class PetFormComponent implements OnInit {
 
   formPet:FormGroup;
   submitted = false;
-  @Input() pet : Pet;
+  //@Input() pet : Pet;
+  pet = new Pet;
+  @Input() idclient:string;
   @Input() title: string;
   @Output() flagToReaload = new EventEmitter<Boolean>();
   @Output() flagReset = new EventEmitter<Boolean>();
 
-  constructor(private petService : PetService, private formBuilder: FormBuilder) { }
+  constructor(private petService : PetService, private formBuilder: FormBuilder, private activeRoute: ActivatedRoute) { }
 
 
   ngOnInit(): void {
+    console.warn(this.idclient);
+    console.warn(this.pet.vaccines = []);
+    if(this.idclient===undefined){
+      this.activeRoute.params.subscribe(
+        params=>{
+          console.warn(params['id'])
+          if(params['id']){
+            this.petService.retrieve(params['id'])
+            .subscribe(result=> {
+              this.pet = result
+              this.pet.idpet = params['id'];
+              console.warn(this.pet);
+            })
+          }
+          else{
+            this.pet = new Pet();
+          }
+        }
+      );
+    }else{
+      this.pet = new Pet();
+      this.pet.idclient = this.idclient;
+    }
+    
     this.formPet = this.formBuilder.group({
       name: ['', [Validators.required]],
       sex: ['', [Validators.required]],
@@ -44,7 +70,6 @@ export class PetFormComponent implements OnInit {
   }
 
   get f(){
-    
     return this.formPet.controls;
   }
 
@@ -56,6 +81,7 @@ export class PetFormComponent implements OnInit {
 
   onSubmit(): void{
     this.submitted=true;
+    console.warn(this.pet);
     if(this.formPet.invalid){
       console.log('Form Invalid');
       return;

@@ -4,6 +4,7 @@ import { Vaccine } from '../../shared/models/vaccine';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Observable, of } from 'rxjs';
 import { retry } from 'rxjs/operators';
+import { Consult } from 'src/app/shared/models/consult';
 
 
 
@@ -53,15 +54,11 @@ export class PetService {
     )
   }
 
-  listVaccines(id: string):Observable<Vaccine[]>{
-    return this.http.get<Vaccine[]>(this.url.concat('/').concat(id).concat('/vaccines'), this.httpOptions)
+  listConsults(id: string): Observable<Consult[]>{
+    return this.http.get<Consult[]>(this.url.concat('/').concat(id).concat('/consults'), this.httpOptions)
     .pipe(
-      retry(1)
+      retry(1),
     )
   }
-
-
-
-
 
 }

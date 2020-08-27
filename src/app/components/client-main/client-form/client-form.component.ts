@@ -77,17 +77,4 @@ export class ClientFormComponent implements OnInit {
     
   }
 
-  settingForm(){
-
-   this.client.name =  this.formClient.get('name').value
-   this.client.lastname =  this.formClient.get('lastname').value  
-   this.client.ci =  this.formClient.get('ci').value
-   this.client.phone =  this.formClient.get('phone').value 
-   this.client.borndate =  this.formClient.get('borndate').value
-   this.client.direction =  this.formClient.get('direction').value
-   this.client.gender =  this.formClient.get('gender').value
-
-  }
-
-
 }

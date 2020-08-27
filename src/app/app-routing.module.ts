@@ -10,20 +10,34 @@ import { ScheduleConsultComponent } from './components/schedule-consult/schedule
 import { ConsultListComponent } from './components/consult-main/consult-list/consult-list.component';
 import { ConsultFormComponent } from './components/consult-main/consult-form/consult-form.component';
 import { ConsultMainComponent } from './components/consult-main/consult-main.component';
+import { PetFormComponent } from './components/pet-main/pet-form/pet-form.component';
+import { VaccineMainComponent } from './components/vaccine-main/vaccine-main.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form/sign-up-form.component';
+import { VeterinaryMainComponent } from './components/veterinary-main/veterinary-main.component';
+import { VeterinaryInfoComponent } from './components/veterinary-main/veterinary-info/veterinary-info.component';
+import { MedicineMainComponent } from './components/medicine-main/medicine-main.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: 'client', component: ClientMainComponent},
   {path: 'pet', component: PetMainComponent},
+  {path: 'vaccines', component: VaccineMainComponent},
   {path: 'petlist', component: PetListComponent},
   {path: 'client/:id', component: ClientInfoComponent},  
-  {path: 'pet/:id', component: PetInfoComponent},  
+  {path: 'pet/info/:id', component: PetInfoComponent},  
   {path: 'consult/info/:id', component:ConsultInfoComponent},
   {path: 'schedule', component: ScheduleConsultComponent},
   {path: 'consult/list', component: ConsultListComponent},
-  {path: 'consult/form', component:ConsultFormComponent},
-  {path: 'consultmain', component: ConsultMainComponent}
-
+  {path: 'consult/:pet/form/:id', component:ConsultFormComponent},
+  {path: 'consult/:pet/form', component:ConsultFormComponent},
+  {path: 'consultmain', component: ConsultMainComponent},
+  {path: 'pet/form/:id', component: PetFormComponent},
+  {path: 'veterinary', component: VeterinaryMainComponent},
+  {path: 'veterinary/info/:id', component: VeterinaryInfoComponent},
+  {path: 'veterinary/info', component: VeterinaryInfoComponent},
+  {path: 'medicines', component: MedicineMainComponent},
+  {path: 'signup', component: SignUpFormComponent},
+  
 ];
 
 @NgModule({

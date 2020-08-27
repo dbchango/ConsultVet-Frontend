@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, SimpleChanges } from '@angular/core';
 import { Consult } from 'src/app/shared/models/consult';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { ClientService } from 'src/app/core/services/client.service';
 import { ConsultService } from 'src/app/core/services/consult.service';
 import { Pet } from 'src/app/shared/models/pet';
+import { PetService } from 'src/app/core/services/pet.service';
 @Component({
   selector: 'app-client-consults',
   templateUrl: './client-consults.component.html',
@@ -12,31 +12,39 @@ import { Pet } from 'src/app/shared/models/pet';
 })
 export class ClientConsultsComponent implements OnInit {
   //@Input() pets: Pet[];
-  @Input() clientid: string;
+  @Input() idpet: string;
   @Input() flagToQuery: Boolean;
   consults: Consult[];
 
-  constructor(private clientService: ClientService, private consultService: ConsultService,
+  constructor(private petService: PetService, private consultService: ConsultService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if(this.flagToQuery===true){
-      this.listConsults(this.clientid);
+      this.listConsults(this.idpet);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.flagToQuery.currentValue)
+    if(this.flagToQuery){
+      this.list();
     }
   }
 
   listConsults(id: string): void{
-    this.clientService.listConsults(id).subscribe(
+    this.petService.listConsults(id).subscribe(
       result=>{
         this.consults = result;
+        this.flagToQuery = false;
       }
     )
   }
 
   list(){
-    this.listConsults(this.clientid);
+    this.listConsults(this.idpet);
   }
-
+  
   update(consult: Consult):void{
     const dialogRef = this.dialog.open(ClientConsultsEditDialog,
       {
@@ -45,12 +53,13 @@ export class ClientConsultsComponent implements OnInit {
                 date: consult.date,
                 observation: consult.observation,
                 price: consult.price,
-                responsable: consult.responsable,
                 status: consult.status,
+                idveterinary: consult.idveterinary,
                 idpet: consult.idpet,
-                idclient: consult.idclient,
+                prescription: consult.prescription,
                 pet: consult.pet,
-                client: consult.client
+              
+                veterinary: consult.veterinary
               }
       })
       dialogRef.afterClosed().subscribe(
@@ -69,10 +78,9 @@ export class ClientConsultsComponent implements OnInit {
               date: consult.date,
               observation: consult.observation,
               price:  consult.price,
-              responsable: consult.responsable,
               status: consult.status,
-              idclient: this.clientid,
-       
+              idveterinary: consult.idveterinary,
+              idclient: this.idpet,
         }
       })
   }

@@ -3,6 +3,8 @@ import { Pet } from '../../../shared/models/pet';
 import { PetService } from '../../../core/services/pet.service';
 import { ActivatedRoute } from '@angular/router';
 import { Vaccine } from 'src/app/shared/models/vaccine';
+import { VaccineReference } from 'src/app/shared/models/vaccine-reference';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pet-info',
@@ -11,7 +13,8 @@ import { Vaccine } from 'src/app/shared/models/vaccine';
 })
 export class PetInfoComponent implements OnInit {
   pet = new Pet;
-  vaccines : Vaccine[];
+  flagToQuery:Boolean = false;
+  //vaccines : Vaccine[];
   constructor(private petService: PetService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,7 +25,13 @@ export class PetInfoComponent implements OnInit {
           .subscribe(result=> {
             this.pet = result
             this.pet.idpet=params['id'];
-            this.listVaccines(params['id']);
+            if(result.vaccines===undefined){
+              this.pet.vaccines = []
+            }else{
+              this.pet.vaccines= result.vaccines
+            }
+
+            this.flagToQuery = true;
             console.log(this.pet)
     
           })
@@ -32,12 +41,23 @@ export class PetInfoComponent implements OnInit {
     
   }
 
-  listVaccines(id: string){
-    this.petService.listVaccines(id).subscribe(
+  save(){
+    this.petService.save(this.pet).subscribe(
       result=>{
-        this.vaccines = result;
-        console.warn(result);
+        if(result.icon==='success'){
+          Swal.fire(result);
+        }
       }
     )
   }
+
+  addVaccine($event){
+    console.warn($event);
+    let vaccineref = new VaccineReference();
+    vaccineref.date = new Date().toDateString();
+    vaccineref.name = $event.name;
+    vaccineref.description = $event.description;
+    this.pet.vaccines.push(vaccineref)
+  }
+
 }

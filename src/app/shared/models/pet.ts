@@ -1,9 +1,14 @@
+import { Client } from './client';
+import { VaccineReference } from './vaccine-reference';
+
 export class Pet {
-    idpet: string;
+    idpet?: string;
     name: string;
     color: string; 
     age: string;
     idclient: string;
     type: string;
-    sex: string
+    sex: string;
+    vaccines:  Array<VaccineReference> = [];
+    client?: Client;
 }

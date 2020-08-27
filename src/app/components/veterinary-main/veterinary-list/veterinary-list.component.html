@@ -1,0 +1,32 @@
+<div class="container">
+    <!--Clients table-->    
+</div>
+<div class="container">
+    <!--Clients table-->
+    <table class="table table-hovered">
+        <thead>
+            <td>No.</td>
+            <td>Apellidos</td>
+            <td>Nombres</td>
+            <td>Título</td>
+            <td>Cédula</td>
+            <td>Género</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of veterinaries; let i = index" >
+                <td>{{i +1}}</td>
+                <td>{{ item.lastname }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.degree }}</td>
+                <td>{{ item.ci }}</td>
+                <td>{{ item.gender }}</td>
+                <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/veterinary/info', item.idveterinary]"><mat-icon>info</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(item)"><mat-icon>update</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(item)"><mat-icon>clear</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

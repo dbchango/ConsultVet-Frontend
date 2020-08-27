@@ -11,6 +11,7 @@ import { Consult } from 'src/app/shared/models/consult';
 })
 export class ClientService {
   url: string = 'https://consultoriovet-eb010.web.app/api/clients';
+  baseurl:string = 'https://consultoriovet-eb010.web.app/api'
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,7 +25,7 @@ export class ClientService {
     let clientBody = JSON.stringify(client);
     console.log(clientBody);
     if (client.idclient === undefined) {
-      return this.http.post<Client>(
+      return this.http.post(
         this.url, clientBody, this.httpOptions
       )
     } else {
@@ -47,12 +48,7 @@ export class ClientService {
       )
   }
 
-  list(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.url, this.httpOptions)
-      .pipe(
-        retry(1)  
-      )
-  }
+  
 
   listInterval(limit: number, last:number): Observable<Client[]>{
     let lim = String(limit);
@@ -75,6 +71,17 @@ export class ClientService {
     .pipe(
       retry(1),
     )
+  }
+
+  count():Observable<any>{
+    return this.http.get<any>(this.baseurl.concat('/count/clients'))
+  }
+
+  list(page:number, limit:number): Observable<Client[]> {
+    return this.http.get<Client[]>(this.baseurl.concat('/page/clients/').concat(String(page)).concat('/').concat(String(limit)), this.httpOptions)
+      .pipe(
+        retry(1)  
+      )
   }
 
 }

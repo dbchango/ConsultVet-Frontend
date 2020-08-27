@@ -1,0 +1,38 @@
+<div class="contariner">
+    <p>{{ title }}</p>
+    <form [formGroup]="form" class="user">
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="legacy" class="formWidth">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" formControlName="name">
+                    <mat-error *ngIf="f.name.hasError('requider')">
+                        El nombre es requerido
+                    </mat-error>
+                </mat-form-field>            
+            </div>
+            <div class="col">
+                <mat-form-field apparience="legacy" class="formWidth">
+                    <mat-label>Descripcion</mat-label>
+                    <input matInput type="text" formControlName="description">
+                    <mat-error *ngIf="f.name.hasError('requider')">
+                        Debe ingresar una descripcion de la vacuna
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        
+        <mat-form-field apparience="legacy" class="formWidth">
+            <mat-label>Brand</mat-label>
+            <input matInput type="text" formControlName="brand">
+            <mat-error *ngIf="f.brand.hasError('requider')">
+                Debe especificar la marca de la vacuna
+            </mat-error>
+        </mat-form-field>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success"><mat-icon>save</mat-icon></button>
+            <button type="reset" (click)="onReset()" class="btn btn-danger"><mat-icon>save</mat-icon></button>
+        </div>
+    </form>
+</div>

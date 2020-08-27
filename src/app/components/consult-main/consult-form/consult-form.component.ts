@@ -4,6 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Consult } from 'src/app/shared/models/consult';
 import Swal from 'sweetalert2';
 import { faQuoteLeft, faIdCard, faVenusMars, faCalendarDay, faPhoneAlt, faDirections, faSave, faBackspace } from '@fortawesome/free-solid-svg-icons'
+import { ActivatedRoute } from '@angular/router';
+import { Medicine } from '../../../shared/models/medicine'; 
+import { Prescription } from 'src/app/shared/models/prescription';
+import { VeterinaryService } from 'src/app/core/services/veterinary.service';
+import { Veterinary } from 'src/app/shared/models/veterinary';
 
 @Component({
   selector: 'app-consult-form',
@@ -22,22 +27,55 @@ export class ConsultFormComponent implements OnInit {
 
   formConsult: FormGroup;
 
-  @Input() consult:Consult;
+  veterinaries:Veterinary[];
   @Input() title: string;
   @Output() flagToReload = new EventEmitter<Boolean>();
+  consult = new Consult();
   submitted = false;
-  constructor(private consultService:ConsultService, private formBuilder: FormBuilder) { }
+  constructor(private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.subscribe(
+      params=>{
+        if(params['id']){
+          this.consultService.retrieve(params['id'])
+          .subscribe(
+            result=>{
+              this.consult = result;
+              this.consult.idconsult = params['id'];
+              if(result.prescription===undefined){
+                this.consult.prescription = [];
+              }else{
+                this.consult.prescription = result.prescription
+              }
+
+            }
+          )
+        }else{
+          this.consult = new Consult();
+          
+        }
+        this.consult.idpet = params['pet'];
+      }
+    );
     this.formConsult = this.formBuilder.group({
       observation: [''],
       price: ['', [Validators.required, Validators.min(0)]],
-      responsable: ['', [Validators.required]],
+      idveterinary: ['', [Validators.required]],
       status: ['', [Validators.required]],
       date: ['', [Validators.required]],
     });
+    this.listVeterinaries();
   }
 
+  listVeterinaries(){
+    this.vaterinaryService.list().subscribe(
+      result=>{
+        this.veterinaries = result;
+      }
+    )
+  }
 
   get f(){
     return this.formConsult.controls;
@@ -46,10 +84,21 @@ export class ConsultFormComponent implements OnInit {
     this.formConsult.reset();
     this.submitted = false;
   }
+
+  addMedicine($event){
+    console.warn($event);
+    let prescription = new Prescription();
+    prescription.idmedicine = $event.idmedicine;
+    prescription.name = $event.name;
+    prescription.description = $event.description;
+    prescription.price = $event.price;
+    this.consult.prescription.push(prescription);
+  }
+
   onSubmit(): void{
     this.submitted = true;
     if(this.formConsult.invalid){
-      console.warn("forma invalida")
+      console.warn("Invalid form")
       return;
     }
     this.consultService.save(this.consult).subscribe(
@@ -64,5 +113,7 @@ export class ConsultFormComponent implements OnInit {
       }
     )
   }
+
+
 
 }

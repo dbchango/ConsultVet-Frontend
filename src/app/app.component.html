@@ -16,20 +16,20 @@
 
     <button mat-button routerLink="/">Inicio</button>
   </span>
-    <button mat-button [matMenuTriggerFor]="menuClient">Clientes</button>
-    <mat-menu #menuClient="matMenu">
-      <button mat-menu-item routerLink="/client">Registrar nuevo cliente</button>
+  <button mat-button [matMenuTriggerFor]="menuGestion">Gestionar</button>
+    <mat-menu #menuGestion="matMenu">
+      <button mat-menu-item routerLink="/veterinary">Gestión Veterinarios</button>
+      <button mat-menu-item routerLink="/medicines">Gestión Medicinas</button>
+      <button mat-button routerLink="/vaccines">Gestión Vacunas</button>
     </mat-menu>
+    <button mat-button routerLink="/client">Clientes</button>
     <button mat-button [matMenuTriggerFor]="menuPet" >Mascotas</button>
     <mat-menu #menuPet="matMenu">
       <button mat-menu-item routerLink="/petlist">Listado de mascotas</button>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="menuConsult">Consultas</button>
-    <mat-menu #menuConsult="matMenu">
-      <button mat-menu-item routerLink="/consultmain">Agendar Consultas</button>
-    </mat-menu>
-    
+
     <div class="spacer"></div>
+    <button mat-button routerLink="/signup">Sign Up</button>
 </mat-toolbar>
 
 <div class="content" role="main">

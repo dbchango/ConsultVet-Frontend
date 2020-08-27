@@ -15,9 +15,12 @@ export class ClientListComponent implements OnInit {
   faInfo = faInfo;
   clients : Client[];
   querysize: number = 10;//array length
-  last: number;//valor a partir del cual se realizara la connsulta
-  actualPage: number = 1;
-  
+  numberPages : number;
+  numberDocs : number;  
+  limit : number = 10;   
+  currentPage : number = 1;
+  pages : Array<number> = [];
+  last = '-';
 
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
@@ -26,18 +29,58 @@ export class ClientListComponent implements OnInit {
   constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
-  this.last=0;
-    this.list();
+    this.count();
   }
+
+  init():void{
+    this.pages = [];
+    this.currentPage = 1;
+    this.last='-';
+  }
+
+  count():void{
+    this.clientService.count().subscribe(
+      result=>{
+        console.log(result);
+        this.numberDocs = result.numberDocs;
+        this.calcNumberPages();
+      }
+    )
+  }
+
+  changeLimit($event){
+    this.limit = $event.target.value;
+    this.calcNumberPages();
+  }
+
+  loadPage(pg : number){    
+    this.currentPage = pg;
+    this.clientService.list(pg, this.limit).subscribe(
+      result => {this.clients = result      
+    }
+    )
+  }
+
+  calcNumberPages(){
+    this.init();
+    this.numberPages = Math.floor(this.numberDocs/this.limit);
+    this.numberPages++;
+    for (let index = 1; index <= this.numberPages; index++) {            
+      this.pages.push(index);
+    }    
+    this.loadPage(this.currentPage);
+  }
+
   ngOnChanges(changes: SimpleChanges){
     if(changes.flagToReload.currentValue){
       console.log('Flag changed to: '+this.flagToReload);
       if(this.flagToReload){
-        this.list();
+        this.loadPage(this.currentPage);
       }
     }
   }
 
+/*
   list(): boolean{
     this.clientService.listInterval(this.querysize, this.last).subscribe(
       result =>{
@@ -47,7 +90,7 @@ export class ClientListComponent implements OnInit {
       }
     )
     return true;
-  }
+  }*/
 
   retrieve(client: Client): void{
     Swal.fire({
@@ -82,7 +125,7 @@ export class ClientListComponent implements OnInit {
         this.clientService.delete(client.idclient).subscribe(
           result=>{
             Swal.fire(result);
-            this.list();
+            this.loadPage(this.currentPage);
           }
         )
       }
@@ -93,7 +136,7 @@ export class ClientListComponent implements OnInit {
     console.log('Client to edit '+client.idclient);
     this.clientToEdit.emit(client);
   }
-
+/*
   changeSize(): void{
     this.last=0;
     this.list()
@@ -118,6 +161,6 @@ export class ClientListComponent implements OnInit {
       this.actualPage--;
     }
     
-  }
+  }*/
 
 }

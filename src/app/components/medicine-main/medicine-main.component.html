@@ -1,0 +1,16 @@
+<div class="container">
+
+    <!--Client component table-->
+    <mat-tab-group dynamicWidth dynamicHeight mat-align-tabs="center">
+        <mat-tab label="Formulario de medicina">
+            <div class=" mat-elevation-z4">
+                <app-medicine-form [title]="mainTitle" [medicine]="mainMedicine" (flagToReload)="reloadToDo($event)"></app-medicine-form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Lista de medicinas">
+            <div class=" mat-elevation-z4">
+                <app-medicine-list (reloadComplete)="reloadToDo($event)" [flagToReload]="mainReload" (medicineToEdit)="mainUpdate($event)"></app-medicine-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

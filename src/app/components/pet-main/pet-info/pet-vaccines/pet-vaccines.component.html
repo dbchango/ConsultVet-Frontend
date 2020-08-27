@@ -5,17 +5,12 @@
             <td>Fecha</td>
             <td>Responsable</td>
             <td>Nombre</td>
-            <td>Observación</td>
-            <td></td>
-            
+            <td></td>         
         </thead>
         <tr *ngFor="let vaccine of vaccines; let i = index">
             <td>{{ i+1 }} </td>
-            <td>{{ vaccine.date }}</td>
-            <td>{{ vaccine.responsable }}</td>
             <td>{{ vaccine.name }}</td>
-            <td>{{ vaccine.observation }}</td>
-           
+            <td>{{ vaccine.name }}</td>
         </tr>
     </table>
 </div>

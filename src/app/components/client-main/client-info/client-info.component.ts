@@ -13,7 +13,6 @@ export class ClientInfoComponent implements OnInit {
   client = new Client;
   clientid: string;
   flagToQuery: Boolean;
-
   @Input() pets:Pet[];
 
   constructor(private clientService: ClientService, private activeRoute: ActivatedRoute) { }
@@ -26,7 +25,8 @@ export class ClientInfoComponent implements OnInit {
           this.clientid = params['id'];
           this.clientService.retrieve(params['id'])
           .subscribe(result=> {
-            this.client = result
+            this.client = result;
+            this.client.idclient = params['id'];
           })
         }
       }
@@ -36,12 +36,5 @@ export class ClientInfoComponent implements OnInit {
   getPets($event){
     this.pets = $event
   }
-
-
-
- 
-
- 
-
 
 }

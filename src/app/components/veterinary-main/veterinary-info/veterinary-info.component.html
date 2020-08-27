@@ -1,0 +1,62 @@
+<!--Client info -->
+<div class="container">
+    <mat-card-title>{{ veterinary.name |titlecase}} {{ veterinary.lastname|titlecase }}</mat-card-title>
+    <div class="row">
+        <div class="col">
+            <mat-label>Nombres</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.name}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Apellidos</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.lastname}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Direccion</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.direction}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Cedula</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.ci}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Telefono</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.phone}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Género</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.gender}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.borndate}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Titulo universitario</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{veterinary.degree}}</strong></p>
+            </mat-card>
+        </div>
+    </div>
+</div><br><br>

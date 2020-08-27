@@ -1,1 +1,46 @@
-<p>sign-up-form works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="user">
+    <div class="row">
+        <div class="col">
+            <mat-form-field apparience="legacy" class="formWidth" >
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" >
+                <mat-hint>Ej:. email@mail.com</mat-hint>
+                <mat-error *ngIf="f.email.hasError('required')&&submitted">
+                    El nombre es requerido
+                </mat-error>
+                <mat-error *ngIf="f.email.hasError('email')">
+                    Ingrese un correo valido                
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field apparience="legacy" class="formWidth" >
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput type="text" formControlName="displayName" [ngClass]="{'is-invalid': submitted && f.displayName.errors }">
+                <mat-hint>Ej:. erKali</mat-hint>
+                <mat-error *ngIf="f.displayName.hasError('required')&&submitted">
+                    El nombre es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field apparience="legacy" class="formWidth" >
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password" >
+                <mat-error *ngIf="f.password.hasError('required')&&submitted">
+                    Debe ingresar una contraseña
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-success"><mat-icon>save</mat-icon></button>
+        <button type="reset" (click)="onReset()" class="btn btn-danger"><mat-icon>save</mat-icon></button>
+    </div>
+</form>
+
+
+

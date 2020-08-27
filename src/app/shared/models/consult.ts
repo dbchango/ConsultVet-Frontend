@@ -1,15 +1,15 @@
 import { Pet } from './pet';
-import { Client } from './client';
-
+import { Veterinary } from './veterinary';
+import { Prescription } from './prescription';
 export class Consult {
     idconsult?: string;
     date: string;
     observation:string;
     price: number;
-    responsable: string;
     status: number;
     idpet: string;
-    idclient: string;
+    prescription: Array<Prescription> = [];
+    idveterinary: string;
     pet?: Pet;
-    client?: Client;
+    veterinary?: Veterinary;
 }

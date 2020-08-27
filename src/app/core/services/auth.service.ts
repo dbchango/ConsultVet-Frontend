@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  url: string = 'https://consultoriovet-eb010.web.app/api/clients';
+  url: string = 'https://consultoriovet-eb010.web.app/api/auth/signup';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

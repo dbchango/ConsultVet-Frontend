@@ -3,6 +3,8 @@ import { ConsultService } from 'src/app/core/services/consult.service';
 import { ActivatedRoute } from '@angular/router';
 import { Consult } from 'src/app/shared/models/consult';
 import { Client } from 'src/app/shared/models/client';
+import { Veterinary } from 'src/app/shared/models/veterinary';
+import { Pet } from 'src/app/shared/models/pet';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class ConsultInfoComponent implements OnInit {
     this.activeRoute.params.subscribe(
       params=>{
         if(params['id']){
-          this.consult.client = new Client();
+          this.consult.pet = new Pet();
+          this.consult.veterinary = new Veterinary();
+          this.consult.pet.client = new Client();
           this.consultService.retrieve(params['id'])
           .subscribe(
             result=>{
