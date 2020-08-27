@@ -1,0 +1,17 @@
+<div class="container">
+    <!--Client component table-->
+
+    
+    <mat-tab-group dynamicWidth dynamicHeight mat-align-tabs="center">
+        <mat-tab label="Formulario de veterinarios">
+            <div class=" mat-elevation-z4">
+                <app-veterinary-form [title]="mainTitle" [veterinary]="mainVeterinary" (flagToReload)="reloadToDo($event)"></app-veterinary-form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Lista de veterinarios">
+            <div class=" mat-elevation-z4">
+                <app-veterinary-list (reloadComplete)="reloadToDo($event)" [flagToReload]="mainReload" (veterinaryToEdit)="mainUpdate($event)"></app-veterinary-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

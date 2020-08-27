@@ -1,0 +1,33 @@
+<div class="container">
+    <mat-label>Consultas registradas</mat-label><br>
+    <!--Clients table-->    
+</div>
+<div class="container">
+    <!--Clients table-->
+    <table class="table table-hove">
+        <thead>
+            <td>No.</td>
+            <td>Fecha</td>
+            <td>Precio</td>
+            <td>Responsable</td>
+            <td>Cliente</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let consult of consults ; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ consult.date }}</td>
+                <td>{{ consult.price }}</td>
+                <td>{{ consult.responsable }}</td>
+                <td>{{ consult.client.name }}</td>
+                <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/consult/info', consult.idconsult]"><mat-icon>info</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(consult)"><mat-icon>update</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

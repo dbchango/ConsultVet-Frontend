@@ -1,0 +1,31 @@
+
+<div class="container">
+    <table class="table table-hove">
+        <thead>
+            <td>No.</td>
+            <td>Nombre</td>
+            <td>Sexo</td>
+            <td>Edad</td>
+            <td>Color</td>
+            <td>Tipo</td>
+            <td></td>
+            <td></td>
+            <td><button mat-button class="btn btn-sm btn-info btntable" (click)="create()"><mat-icon>add</mat-icon></button></td>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let pet of pets ; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.sex }}</td>
+                <td>{{ pet.age }}</td>
+                <td>{{ pet.color }}</td>
+                <td>{{ pet.type }}</td>
+                <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/pet/info', pet.idpet]"><mat-icon>info</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-warning btntable" [routerLink]="['/pet/form', pet.idpet]"><mat-icon>update</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(pet)"><mat-icon>clear</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

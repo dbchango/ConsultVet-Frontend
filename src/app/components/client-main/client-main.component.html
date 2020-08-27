@@ -1,0 +1,16 @@
+
+<div class="container">
+    <!--Client component table-->
+    <mat-tab-group dynamicWidth dynamicHeight mat-align-tabs="center">
+        <mat-tab label="Formulario de cliente">
+            <div class=" mat-elevation-z4">
+                <app-client-form  [title] = "mainTitle" [client]="mainClient" (flagToReload)="reloadToDo($event)"></app-client-form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Lista de clientes">
+            <div class=" mat-elevation-z4">
+                <app-client-list  [flagToReload]="mainReload" (clientToEdit)="mainUpdate($event)" (reloadComplete)="reloadDone($event)"></app-client-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

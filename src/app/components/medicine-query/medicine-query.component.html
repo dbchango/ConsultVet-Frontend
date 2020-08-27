@@ -1,0 +1,29 @@
+<div class="container">
+    <!--Clients table-->    
+</div>
+<div class="container">
+    <!--Clients table-->
+    <table class="table table-hovered">
+        <thead>
+            <td>No.</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Presentación</td>
+            <td>Composición</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of medicines; let i = index" >
+                <td>{{i +1}}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.presentation }}</td>
+                <td>{{ item.composition }}</td>
+                <td><button mat-button class="btn btn-sm btn-info btntable" (click)="addMedicine(item)" ><mat-icon>add</mat-icon></button></td>
+               
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Fecha</td>
+            <td>Responsable</td>
+            <td>Nombre</td>
+            <td></td>         
+        </thead>
+        <tr *ngFor="let vaccine of vaccines; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ vaccine.name }}</td>
+            <td>{{ vaccine.name }}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,17 @@
+<div class="container"> 
+      <!--Pet component table-->
+        <mat-tab-group dynamicHeight>
+          <mat-tab label="Formulario de Mascotas">
+            <div class=" mat-elevation-z4">
+                <app-pet-form [title]="mainTitle" (flagToReaload)="reloadToDo($event)"></app-pet-form>
+            </div>
+          </mat-tab>
+          <mat-tab label="Lista de Mascotas">
+            <div class="mat-elevation-z4">
+                <app-pet-list (petToEdit)="mainUpdate($event)" [flagToReload]="mainReload" (reloadComplete)="reloadDone($event)"></app-pet-list>
+            </div>
+          </mat-tab>
+        </mat-tab-group>   
+</div>
+
+

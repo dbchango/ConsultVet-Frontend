@@ -1,0 +1,108 @@
+<div>
+    <p>{{ title }}</p>
+    <form [formGroup]="formClient" (ngSubmit)="onSubmit()" class="user">
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="legacy" class="formWidth" >
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" formControlName="name" [(ngModel)]="client.name" [ngClass]="{'is-invalid': submitted && f.name.errors }">
+                    <mat-hint>Ej:. Paúl Andrés</mat-hint>
+                    <mat-error *ngIf="f.name.hasError('required')&&submitted">
+                        El nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field apparience="fill" class="short-input formWidth" >
+                    <mat-label>Apellido</mat-label>
+                    <input matNativeControl formControlName="lastname" [(ngModel)]="client.lastname" [ngClass]="{'is-invalid': submitted && f.lastname.errors }">
+                    <mat-error *ngIf="f.lastname.hasError('required')&&submitted">
+                        El Apellido es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Direccion</mat-label>
+                    <input matNativeControl formControlName="direction" [(ngModel)]="client.direction" [ngClass]="{'is-invalid': submitted && f.direction.errors }">
+                    <mat-hint>Ej:. Pérez Sánchez</mat-hint>
+                    <mat-error *ngIf="f.direction.hasError('required')&&submitted">
+                        La dirección es requerida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-5">              
+                <mat-form-field apparience="fill" class="short-input formWidth" hintLabel="Maximo 10 caracteres">
+                    <mat-label>Cedula</mat-label>
+                    <input matNativeControl formControlName="ci" [maxLength]=10 [(ngModel)]="client.ci" [ngClass]="{'is-invalid': submitted && f.ci.errors }">
+                    <mat-error *ngIf="f.ci.hasError('required')&&submitted">
+                        El número de cédula es requerido
+                    </mat-error>   
+                </mat-form-field>
+            </div>  
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Telefono</mat-label>
+                    <input [maxLength]=10 matNativeControl formControlName="phone" [(ngModel)]="client.phone" [ngClass]="{'is-invalid': submitted && f.phone.errors }">
+                    <mat-error *ngIf="f.phone.hasError&&submitted">
+                        El número de teléfono es requerido
+                    </mat-error>   
+                </mat-form-field>
+            </div>
+            <div class="col">
+                
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    
+                    <mat-label>Género</mat-label>
+                    <mat-select [(ngModel)]="client.gender" formControlName="gender" [ngClass]="{'is-invalid': submitted && f.gender.errors }">
+                        <mat-option value="Masculino">Masculino</mat-option>
+                        <mat-option value="Femenino">Femenino</mat-option>
+                        <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="f.gender.hasError('required')&&submitted">
+                        No ha seleccionado un genero
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matNativeControl formControlName="borndate" [(ngModel)]="client.borndate" [ngClass]="{'is-invalid': submitted && f.borndate.errors }" type="date">
+                    <mat-error *ngIf="f.borndate.hasError('required')&&submitted">
+                        No ha ingresado la fecha de nacimiento
+                    </mat-error>   
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success">
+                <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
+            <button type="reset" (click)="onReset()" class="btn btn-danger">
+                <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+        </div>
+    </form>
+    
+
+</div>
+
+        
+
+
+
+        
+        
+        
+    
+                
+
+
+
+
+

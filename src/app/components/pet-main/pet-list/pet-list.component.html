@@ -1,0 +1,32 @@
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Nombre</td>
+            <td>Color</td>
+            <td>Edad</td>
+            <td>Sexo</td>
+            <td>Tipo</td>
+            <td>Dueño</td>
+            <td></td>
+        </thead>
+        <tr *ngFor="let pet of pets; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.color }}</td>
+            <td>{{ pet.age }}</td>
+            <td>{{ pet.sex }}</td>
+            <td>{{ pet.type }}</td>
+            <td>{{ pet.client.lastname }} {{ pet.client.name }}</td>
+            <td>
+                <button mat-button class="btn btn-sm btn-info" [routerLink]="['/pet/info', pet.idpet]"><mat-icon>info</mat-icon></button>
+                <!--
+                    <button mat-button class="btn btn-sm btn-warning" (click)="update(pet)"><mat-icon>update</mat-icon></button>
+                <button mat-button class="btn btn-sm btn-danger" (click)="delete(pet)"><mat-icon>clear</mat-icon></button>
+
+                -->
+                
+            </td>
+        </tr>
+    </table>
+</div>

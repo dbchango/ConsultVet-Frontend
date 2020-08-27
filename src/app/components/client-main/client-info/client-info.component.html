@@ -1,0 +1,63 @@
+<!--Client info -->
+<div class="container">
+    <mat-card-title>{{ client.name |titlecase}} {{ client.lastname|titlecase }}</mat-card-title>
+    <div class="row">
+        <div class="col">
+            <mat-label>Nombres</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.name}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Apellidos</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.lastname}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Direccion</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.direction}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Cedula</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.ci}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Telefono</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.phone}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Género</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.gender}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{client.borndate}}</strong></p>
+            </mat-card>
+        </div>
+    </div>
+</div><br><br>
+<!--Mascotas del cliente-->
+<div class="container">
+    <mat-card-title>{{ "Listado de Mascotas"|titlecase }}</mat-card-title>
+    <div class="row">
+        <div class="col">
+            <app-client-pets (petsout)="getPets($event)" [clientid]="clientid"  [flagToQuery]="flagToQuery"></app-client-pets>
+        </div>
+    </div><br><br>
+</div>

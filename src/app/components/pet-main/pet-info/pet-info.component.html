@@ -1,0 +1,100 @@
+
+<div class="container">
+    <mat-card-title>{{ pet.name |titlecase}}</mat-card-title>
+    <div class="row">
+        <div class="col">
+            <mat-label>Nombre</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{pet.name}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Edad</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{pet.age}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Color</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{pet.color}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-label>Sexo</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{pet.sex}}</strong></p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Tipo</mat-label>
+            <mat-card class="bg bg-light">
+                <p class="h6"><strong>{{pet.type}}</strong></p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
+    
+</div>
+
+
+
+
+<mat-divider></mat-divider>
+<mat-card-title>{{ "Vacunas"|titlecase }}</mat-card-title>
+
+<div class="container">
+        
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Nombre</td>
+            <td>Descripcion</td>
+            <td>Fecha</td>
+            <td><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
+                <mat-icon>add_circle</mat-icon>
+            </button></td>         
+        </thead>
+        <tr *ngFor="let item of pet.vaccines; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date }}</td>            
+            <td>
+            </td>
+        </tr>
+    </table>
+    <button mat-button class="btn btn-sm btn-info" (click)="save()"><mat-icon>save</mat-icon></button>
+</div>
+
+
+
+
+
+<br><br>
+<mat-divider></mat-divider>
+<mat-card-title>{{ "Listado de Consultas"|titlecase }}</mat-card-title>
+
+<div class="row">
+    
+    <div class="col">
+        <app-client-consults  [idpet]="pet.idpet" [flagToQuery]="flagToQuery"></app-client-consults>
+    </div>
+</div><br><br>
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-vaccine-list (vaccineAdded)="addVaccine($event)"></app-vaccine-list>
+        </div>
+    </div>
+  </div>
+
+

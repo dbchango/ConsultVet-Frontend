@@ -1,0 +1,105 @@
+<div class="container">
+    <div>
+        <p>{{ title }}</p>
+        <!--Pet Form-->
+        <form [formGroup]="formPet" (ngSubmit)="onSubmit()" class="user">
+            <div class="row">
+                <div class="col">
+                    <!--Input name-->
+                    <mat-form-field apparience="legacy" class="formWidth">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" formControlName="name" [(ngModel)]="pet.name" [ngClass]="{'is-invalid': submitted && f.name.errors }">
+                        <mat-hint>Ej: Toby</mat-hint>
+                        <mat-error *ngIf="f.name.hasError('required')&&submitted">
+                            No ha ingresado un nombre
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <!--Input age-->
+                    <mat-form-field apparience="legacy" class="formWidth">
+                        <mat-label>Edad</mat-label>
+                        <input placeholder="Años" matInput type="number" min=0 formControlName="age" [(ngModel)]="pet.age" [ngClass]="{'is-invalid': submitted && f.age.errors }">
+                        <mat-hint>Ej: 12</mat-hint>
+                        <mat-error *ngIf="f.age.hasError('required')&&submitted">
+                            No ha ingresado la edad
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!--Input nombre-->
+                    <mat-form-field apparience="legacy" class="formWidth">
+                        <mat-label>Color</mat-label>
+                        <input placeholder="Color" matInput type="text" min=0 formControlName="color" [(ngModel)]="pet.color" [ngClass]="{'is-invalid': submitted && f.color.errors }">
+                        <mat-hint>Ej: Negro</mat-hint>
+                        <mat-error *ngIf="f.color.hasError('required')&&submitted">
+                            No ha ingresado la edad
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col">
+                    <!--Select sex-->
+                    <mat-form-field apparience="field" class="short-input formWidth">
+                        <mat-label>Sexo</mat-label>
+                        <mat-select [(ngModel)]="pet.sex" formControlName="sex" [ngClass]="{'is-invalid': submitted && f.sex.errors }">
+                            <mat-option value="Macho">Macho</mat-option>
+                            <mat-option value="Hembra">Hembra</mat-option>
+                            <mat-option value="Otros">Otros</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.sex.hasError('required')&&submitted">
+                            No ha seleccionado un sexo
+                        </mat-error>
+                    </mat-form-field>
+                    
+
+                   
+                    
+                </div>
+                <div class="col">
+                    <!--Select Pet Type-->
+                    <mat-form-field apparience="field" class="short-input formWidth">
+                        <mat-label>Especie</mat-label>
+                        <mat-select [(ngModel)]="pet.type" formControlName="type" [ngClass]="{'is-invalid': submitted && f.type.errors }">
+                            <mat-option value="Perro">Perro</mat-option>
+                            <mat-option value="Gato">Gato</mat-option>
+                            <mat-option value="Perico">Perico</mat-option>
+                            <mat-option value="Hamster">Hamster</mat-option>
+                            <mat-option value="Otros">Otros</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.type.hasError('required')&&submitted">
+                            No ha seleccionado una especie
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+             <!--Botones-->
+            <div class="row">
+                <div class="col">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-success">
+                            <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
+                        <button type="reset" (click)="onReset()" class="btn btn-danger">
+                            <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+            
+    
+    
+    
+            
+            
+            
+        
+                    
+    
+    
+    

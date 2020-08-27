@@ -1,0 +1,23 @@
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Fecha</td>
+            <td>Responsable</td>
+            <td>Precio</td>
+            
+            <td></td>
+            <td><button mat-button class="btn btn-sm btn-info" [routerLink]="['/consult/'+idpet+'/form']"><mat-icon>add</mat-icon></button></td>
+        </thead>
+        <tr *ngFor="let consult of consults; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ consult.date }}</td>
+            <td>{{ consult.veterinary }}</td>
+            <td>{{ consult.price }}</td>
+            
+            <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/consult/info', consult.idconsult]"><mat-icon>info</mat-icon></button></td>
+            <td> <button mat-button class="btn btn-sm btn-warning" [routerLink]="['/consult/'+idpet+'/form/'+consult.idconsult]"><mat-icon>update</mat-icon></button></td> 
+            <td><button mat-button class="btn btn-sm btn-danger" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
+        </tr>
+    </table>
+</div>

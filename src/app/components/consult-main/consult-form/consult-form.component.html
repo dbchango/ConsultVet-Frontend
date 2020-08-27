@@ -1,0 +1,95 @@
+<div>
+    <p>{{ title }}</p>
+    <form [formGroup]="formConsult" (ngSubmit)="onSubmit()" class="user">
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="legacy" class="formWidth" >
+                    <mat-label>Fecha</mat-label>
+                    <input matInput type="datetime-local" type="date" formControlName="date" [(ngModel)]="consult.date" [ngClass]="{'is-invalid': submitted && f.date.errors }">
+                    <mat-error *ngIf="f.date.hasError('required')&&submitted">
+                        La fecha es requerida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field apparience="fill" class="short-input formWidth" >
+                    <mat-label>Precio</mat-label>
+                    <input matNativeControl type="number" min="1" formControlName="price" [(ngModel)]="consult.price" [ngClass]="{'is-invalid': submitted && f.price.errors }">
+                    <mat-error *ngIf="f.price.hasError('required')&&submitted">
+                        El precio es requerido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select [(ngModel)]="consult.idveterinary" formControlName="idveterinary" [ngClass]="{'is-invalid': submitted && f.idveterinary.errors }">
+                        <mat-option [value]="item.idveterinary" *ngFor="let item of veterinaries">{{ item.name }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.idveterinary.hasError&&submitted">
+                        El nombre del respnsable es requerido
+                    </mat-error>   
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Estado de consulta</mat-label>
+                    <mat-select [(ngModel)]="consult.status" formControlName="status" [ngClass]="{'is-invalid': submitted && f.status.errors }">
+                        <mat-option value=1>Agendado</mat-option>
+                        <mat-option value=2>En progreso</mat-option>
+                        <mat-option value=3>Cancelado</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.status.hasError('required')&&submitted">
+                        No ha designado un estado a la consulta
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Observación</mat-label>
+                    <input matNativeControl formControlName="observation" [(ngModel)]="consult.observation" [ngClass]="{'is-invalid': submitted && f.observation.errors }"> 
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success">
+                <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
+            <button type="reset"(click)="onReset()" class="btn btn-danger">
+                <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+        </div>
+    </form>
+    
+
+</div>
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Nombre</td>
+            <td>Indicaciones</td>
+            <td>Precio</td>
+            <td><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
+                <mat-icon>add_circle</mat-icon>
+            </button></td>         
+        </thead>
+        <tr *ngFor="let item of consult.prescription; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.price }}</td>            
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           <app-medicine-query (medicineAdded)="addMedicine($event)"></app-medicine-query>
+        </div>
+    </div>
+  </div>
