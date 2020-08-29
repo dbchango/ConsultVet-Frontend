@@ -89,32 +89,12 @@ export class ConsultFormComponent implements OnInit {
     this.submitted = false;
   }
 
-  addMedicine($event){
-    let prescription = new Prescription();
-    prescription.idmedicine = $event.idmedicine;
-    prescription.name = $event.name;
-    prescription.description = $event.description;
-    prescription.price = $event.price
-    this.num = this.num+Number(prescription.price);
-    
-    this.consult.prescription.push(prescription);
-    this.calcTotal();
-  }
 
-  calcTotal(){
-    let a:number = 0;
-    this.consult.prescription.forEach(item=>{
-      a += Number(item.price)
-    })
-    this.consult.total = a + this.consult.price
-    console.warn(a)
-    console.warn(this.consult.total)
-  }
 
 
 
   onSubmit(): void{
-    this.calcTotal();
+
     this.submitted = true;
     if(this.formConsult.invalid){
       console.warn("Invalid form")

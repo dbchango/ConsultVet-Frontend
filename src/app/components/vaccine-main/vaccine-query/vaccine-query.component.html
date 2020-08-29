@@ -15,7 +15,7 @@
             <td>{{ item.description }}</td>
             <td>{{ item.brand }}</td>
 
-                <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/vaccine/info', item.idvaccine]"><mat-icon>info</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-info btntable"  (click)="retrieve(item)"><mat-icon>info</mat-icon></button></td>
                 <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(item)"><mat-icon>update</mat-icon></button></td>
                 <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(item)"><mat-icon>clear</mat-icon></button></td>
            

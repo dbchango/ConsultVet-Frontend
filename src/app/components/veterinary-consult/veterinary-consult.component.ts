@@ -33,9 +33,11 @@ export class VeterinaryConsultComponent implements OnInit {
             result=>{
               this.consult = result;
               this.consult.idconsult = params['id'];
+              this.consult.total = 0;
             }
           )
-        }
+        }else
+        this.consult.price = 0;
       }
     );
     this.formConsult = this.formBuilder.group({
@@ -93,6 +95,7 @@ export class VeterinaryConsultComponent implements OnInit {
   }
 
   calcTotal(){
+    
     let a:number = 0;
     this.consult.prescription.forEach(item=>{
       a += Number(item.price)

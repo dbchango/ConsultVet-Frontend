@@ -6,8 +6,8 @@
             <td>Color</td>
             <td>Edad</td>
             <td>Sexo</td>
-            <td>Tipo</td>
-
+            <td>Especie</td>
+            <td>Dueño</td>
             <td></td>
         </thead>
         <tr *ngFor="let pet of pets; let i = index">
@@ -17,6 +17,7 @@
             <td>{{ pet.age }}</td>
             <td>{{ pet.sex }}</td>
             <td>{{ pet.type }}</td>
+            <td>{{ pet.client.name }}</td>
             <td>
                 <button mat-button class="btn btn-sm btn-info" [routerLink]="['/serve/pet', pet.idpet]"><mat-icon>info</mat-icon></button>
             </td>

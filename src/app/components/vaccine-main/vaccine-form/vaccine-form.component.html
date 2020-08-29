@@ -5,7 +5,7 @@
             <div class="col">
                 <mat-form-field apparience="legacy" class="formWidth">
                     <mat-label>Nombre</mat-label>
-                    <input matInput type="text" formControlName="name">
+                    <input [(ngModel)]="vaccine.name" matInput type="text" formControlName="name" [ngClass]="{'is-invalid': submitted && f.name.errors }">
                     <mat-error *ngIf="f.name.hasError('requider')">
                         El nombre es requerido
                     </mat-error>
@@ -14,7 +14,7 @@
             <div class="col">
                 <mat-form-field apparience="legacy" class="formWidth">
                     <mat-label>Descripcion</mat-label>
-                    <input matInput type="text" formControlName="description">
+                    <input [(ngModel)]="vaccine.description" matInput type="text" formControlName="description" [ngClass]="{'is-invalid': submitted && f.description.errors }">
                     <mat-error *ngIf="f.name.hasError('requider')">
                         Debe ingresar una descripcion de la vacuna
                     </mat-error>
@@ -25,14 +25,14 @@
         
         <mat-form-field apparience="legacy" class="formWidth">
             <mat-label>Brand</mat-label>
-            <input matInput type="text" formControlName="brand">
+            <input [(ngModel)]="vaccine.brand" matInput type="text" formControlName="brand" [ngClass]="{'is-invalid': submitted && f.brand.errors }">
             <mat-error *ngIf="f.brand.hasError('requider')">
                 Debe especificar la marca de la vacuna
             </mat-error>
         </mat-form-field>
         <div class="btn-group">
-            <button type="submit" class="btn btn-success"><mat-icon>save</mat-icon></button>
-            <button type="reset" (click)="onReset()" class="btn btn-danger"><mat-icon>save</mat-icon></button>
+            <button type="submit" (click)="onSubmit()" class="btn btn-success"><mat-icon>save</mat-icon></button>
+            <button type="reset" (click)="onReset()" class="btn btn-danger"><mat-icon>cancel</mat-icon></button>
         </div>
     </form>
 </div>

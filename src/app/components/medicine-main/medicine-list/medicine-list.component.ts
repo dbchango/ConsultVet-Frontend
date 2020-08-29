@@ -43,7 +43,7 @@ export class MedicineListComponent implements OnInit {
     Swal.fire({
       title: `<h4>${medicine.name}</h4>`,
       icon: 'info',
-      confirmButtonColor: '#d33',
+      confirmButtonColor: '#31FC71',
       confirmButtonText: 'Aceptar',
       html: `<hr><fieldset>
           <label>Nombre: </label><span>${medicine.name}</span><br>

@@ -54,6 +54,19 @@ export class VaccineQueryComponent implements OnInit {
     })
   }
 
+  retrieve(vaccine: Vaccine): void{
+    Swal.fire({
+      title: `<h4>${vaccine.name}</h4>`,
+      icon: 'info',
+      confirmButtonColor: '#31FC71',
+      confirmButtonText: 'Aceptar',
+      html: `<hr><fieldset>
+          <label>Nombre: </label><span>${vaccine.name}</span><br>
+          <label>Marca: </label><span>${vaccine.brand}</span><br>
+          <label>Descripcón: </label><span>${vaccine.description}</span><br>
+          </fieldset>`,
+    })
+  }
 
 
 }
