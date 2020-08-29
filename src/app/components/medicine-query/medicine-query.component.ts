@@ -7,7 +7,7 @@ import { Medicine } from 'src/app/shared/models/medicine';
   styleUrls: ['./medicine-query.component.css']
 })
 export class MedicineQueryComponent implements OnInit {
-
+  indications:string;
   constructor(private medicineService: MedicineService) { }
   medicines :Medicine[];
   @Output() medicineAdded = new EventEmitter<Medicine>();
@@ -25,5 +25,7 @@ export class MedicineQueryComponent implements OnInit {
   addMedicine(medicine: Medicine){
     this.medicineAdded.emit(medicine);
   }
+
+  
 
 }

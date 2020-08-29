@@ -15,10 +15,10 @@
             <td>{{ consult.price }}</td>
             
             <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/consult/info', consult.idconsult]"><mat-icon>info</mat-icon></button></td>
-            <!--
-            <td> <button mat-button class="btn btn-sm btn-warning" [routerLink]="['/consult/'+idpet+'/form/'+consult.idconsult]"><mat-icon>update</mat-icon></button></td> 
-            <td><button mat-button class="btn btn-sm btn-danger" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
-            -->
+
+            <td><button mat-button class="btn btn-sm btn-warning btntable" [routerLink]="['/veterinary/consults', consult.idconsult]"><mat-icon>update</mat-icon></button></td>
+            <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
+
         </tr>
     </table>
 </div>

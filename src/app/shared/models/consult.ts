@@ -8,6 +8,7 @@ export class Consult {
     price: number;
     status: number;
     idpet: string;
+    total: number;
     prescription: Array<Prescription> = [];
     idveterinary: string;
     pet?: Pet;

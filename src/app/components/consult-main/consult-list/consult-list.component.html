@@ -1,5 +1,17 @@
+<h2>Consultas registradas</h2>
 <div class="container">
-    <mat-label>Consultas registradas</mat-label><br>
+
+    <mat-label>Opciones de consulta</mat-label><br>
+    <div class="row">
+        
+            <mat-label>Numero de registros</mat-label>
+            <select [value]="limit" (change)="changeLimit($event)">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+            </select>
+
+    </div><br>
     <!--Clients table-->    
 </div>
 <div class="container">
@@ -11,6 +23,7 @@
             <td>Precio</td>
             <td>Responsable</td>
             <td>Cliente</td>
+            <td>Mascota</td>
             <td></td>
             <td></td>
             <td></td>
@@ -20,14 +33,30 @@
                 <td>{{ i+1 }}</td>
                 <td>{{ consult.date }}</td>
                 <td>{{ consult.price }}</td>
-                <td>{{ consult.responsable }}</td>
-                <td>{{ consult.client.name }}</td>
+                <td>{{ consult.veterinary.name }}</td>
+                <td>{{ consult.pet.client.name }}</td>
+                <td>{{ consult.pet.name }}</td>
                 <td><button mat-button class="btn btn-sm btn-info btntable"  [routerLink]="['/consult/info', consult.idconsult]"><mat-icon>info</mat-icon></button></td>
-                <td><button mat-button class="btn btn-sm btn-warning btntable" (click)="update(consult)"><mat-icon>update</mat-icon></button></td>
+                <td><button mat-button class="btn btn-sm btn-warning btntable" [routerLink]="['/veterinary/consults', consult.idconsult]"><mat-icon>update</mat-icon></button></td>
                 <td><button mat-button class="btn btn-sm btn-danger btntable" (click)="delete(consult)"><mat-icon>clear</mat-icon></button></td>
             </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" (click)="loadPage(1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          <li class="page-item" *ngFor="let pg of pages"><button class="page-link" (click)="loadPage(pg)">{{pg}}</button></li>              
+          <li class="page-item">
+            <button class="page-link" (click)="loadPage(numberPages)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
 </div>
 
 

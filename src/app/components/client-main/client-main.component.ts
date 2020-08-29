@@ -8,7 +8,6 @@ import { Client } from '../../shared/models/client';
 })
 export class ClientMainComponent implements OnInit {
 
-
   mainClient: Client;
   mainTitle: string;
   mainReload: boolean;

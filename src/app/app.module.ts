@@ -55,6 +55,9 @@ import { MedicineFormComponent } from './components/medicine-main/medicine-form/
 import { MedicineListComponent } from './components/medicine-main/medicine-list/medicine-list.component';
 import { MedicineInfoComponent } from './components/medicine-main/medicine-info/medicine-info.component';
 import { MedicineQueryComponent } from './components/medicine-query/medicine-query.component';
+import { VeterinaryConsultComponent } from './components/veterinary-consult/veterinary-consult.component';
+import { ServePetComponent } from './components/serve-pet/serve-pet.component';
+import { EditConsultsComponent } from './components/serve-pet/edit-consults/edit-consults.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,10 @@ import { MedicineQueryComponent } from './components/medicine-query/medicine-que
     MedicineFormComponent,
     MedicineListComponent,
     MedicineInfoComponent,
-    MedicineQueryComponent
+    MedicineQueryComponent,
+    VeterinaryConsultComponent,
+    ServePetComponent,
+    EditConsultsComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,13 @@
         <div class="col">
             <mat-label>Precio</mat-label>
             <mat-card>
-                <p class="h6">{{ consult.price }}</p>
+                <p class="h6">$ {{ consult.price }}</p>
+            </mat-card>
+        </div>
+        <div class="col">
+            <mat-label>Total</mat-label>
+            <mat-card>
+                <p class="h6">$ {{ consult.total }}</p>
             </mat-card>
         </div>
         <div class="col">
@@ -38,9 +44,37 @@
         </div>
         <div class="col-3">
             <mat-label>Estado</mat-label>
-            <mat-card>
-                <p class="h6">{{ consult.status }}</p>
-            </mat-card>
+            <span [ngSwitch]="consult.status">
+                <mat-card *ngSwitchCase="1">
+                    <span [ngSwitch]="consult.status">
+                        <mat-icon>alarm</mat-icon>&nbsp;&nbsp;Agendado 
+                    </span>
+                </mat-card>
+                <mat-card *ngSwitchCase="2">
+                    <span [ngSwitch]="consult.status">
+                        <mat-icon>done</mat-icon>&nbsp;&nbsp;Realizada
+                    </span>
+                </mat-card>
+            </span> 
+            
         </div>
     </div><br><mat-divider></mat-divider> 
 </div><br><br>
+<div class="container">
+    <table  class="table">
+        <thead>
+            <td>No. </td>
+            <td>Nombre</td>
+            <td>Indicaciones</td>
+            <td>Precio</td>
+      
+        </thead>
+        <tr *ngFor="let item of consult.prescription; let i = index">
+            <td>{{ i+1 }} </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.price }}</td>            
+
+        </tr>
+    </table>
+</div>

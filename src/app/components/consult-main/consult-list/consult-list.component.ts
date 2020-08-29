@@ -11,7 +11,12 @@ import Swal from 'sweetalert2';
 export class ConsultListComponent implements OnInit {
 
   consults : Consult[];
-  
+  numberPages : number;
+  numberDocs : number;  
+  limit : number = 10;   
+  currentPage : number = 1;
+  pages : Array<number> = [];
+  last = '-';
 
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
@@ -21,9 +26,10 @@ export class ConsultListComponent implements OnInit {
   constructor(private consultService: ConsultService) { }
 
   ngOnInit(): void {
-    this.list();
+    //this.list();
+    this.count();
   }
-
+/*
   ngOnChanges(changes: SimpleChanges){
     if(changes.flagToReload.currentValue){
       console.log('Flag changed to: '+this.flagToReload);
@@ -32,7 +38,8 @@ export class ConsultListComponent implements OnInit {
       }
     }
   }
-
+  */
+/*
   list(): boolean{
     this.consultService.list().subscribe(
       result=>{
@@ -42,7 +49,7 @@ export class ConsultListComponent implements OnInit {
       
     )
     return true;
-  }
+  }*/
 
 
   
@@ -61,7 +68,8 @@ export class ConsultListComponent implements OnInit {
         this.consultService.delete(consult.idconsult).subscribe(
           result=>{
             Swal.fire(result);
-            this.list();
+            //this.list();
+            this.loadPage(this.currentPage);
           }
         )
       }
@@ -72,5 +80,46 @@ export class ConsultListComponent implements OnInit {
     console.log('Client to edit '+consult.idconsult);
     this.consultToEdit.emit(consult);
   }
+
+  init():void{
+    this.pages = [];
+    this.currentPage = 1;
+    this.last='-';
+  }
+
+  count():void{
+    this.consultService.count().subscribe(
+      result=>{
+        console.log(result);
+        this.numberDocs = result.numberDocs;
+        this.calcNumberPages();
+      }
+    )
+  }
+
+  changeLimit($event){
+    this.limit = $event.target.value;
+    this.calcNumberPages();
+  }
+
+  loadPage(pg : number){    
+    this.currentPage = pg;
+    this.consultService.listPage(pg, this.limit).subscribe(
+      result => {this.consults = result      
+        
+    }
+    )
+  }
+
+  calcNumberPages(){
+    this.init();
+    this.numberPages = Math.floor(this.numberDocs/this.limit);
+    this.numberPages++;
+    for (let index = 1; index <= this.numberPages; index++) {            
+      this.pages.push(index);
+    }    
+    this.loadPage(this.currentPage);
+  }
+
 
 }

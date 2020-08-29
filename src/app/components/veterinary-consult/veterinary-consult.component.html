@@ -1,15 +1,43 @@
-
 <div>
-    <h2>Agendar consulta</h2>
-
+    <h2>Edición de consulta</h2>
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col">
+            <mat-label>Total</mat-label>
+            <mat-card>
+                <p class="h6">$ {{ consult.total }}</p>
+            </mat-card>
+        </div>
+    </div><br><mat-divider></mat-divider>
     <form [formGroup]="formConsult" (ngSubmit)="onSubmit()" class="user">
         <div class="row">
             <div class="col">
-                <mat-form-field apparience="legacy" class="formWidth" >
-                    <mat-label>Fecha</mat-label>
-                    <input matInput type="datetime-local" type="date" formControlName="date" [(ngModel)]="consult.date" [ngClass]="{'is-invalid': submitted && f.date.errors }">
-                    <mat-error *ngIf="f.date.hasError('required')&&submitted">
-                        La fecha es requerida
+                <mat-label>Fecha</mat-label>
+                <mat-card>
+                    <p>{{ consult.date }}</p>
+                </mat-card>
+            </div>
+            <div class="col">
+                <mat-label>Paciente</mat-label>
+                <mat-card>
+                    <p>{{ consult.pet.name }}</p>
+                </mat-card>
+            </div>
+            <div class="col">
+                <mat-label>Dueño</mat-label>
+                <mat-card>
+                    <p>{{ consult.pet.client.name }}</p>
+                </mat-card>
+            </div>
+        </div><br><br><mat-divider></mat-divider>
+        <div class="row">
+            
+            <div class="col">
+                <mat-form-field apparience="fill" class="short-input formWidth" >
+                    <mat-label>Precio</mat-label>
+                    <input matNativeControl type="number" min="1" formControlName="price" [(ngModel)]="consult.price" [ngClass]="{'is-invalid': submitted && f.price.errors }">
+                    <mat-error *ngIf="f.price.hasError('required')&&submitted">
+                        El precio es requerido
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -31,6 +59,7 @@
                     <mat-label>Estado de consulta</mat-label>
                     <mat-select [(ngModel)]="consult.status" formControlName="status" [ngClass]="{'is-invalid': submitted && f.status.errors }">
                         <mat-option value=1>Agendado</mat-option>
+                        <mat-option value=2>Realizada</mat-option>
                     </mat-select>
                     <mat-error *ngIf="f.status.hasError('required')&&submitted">
                         No ha designado un estado a la consulta
@@ -38,13 +67,19 @@
                 </mat-form-field>
             </div>
         </div>
-
-        
+        <div class="row">
+            <div class="col">
+                <mat-form-field apparience="field" class="short-input formWidth">
+                    <mat-label>Observación</mat-label>
+                    <input matNativeControl formControlName="observation" [(ngModel)]="consult.observation" [ngClass]="{'is-invalid': submitted && f.observation.errors }"> 
+                </mat-form-field>
+            </div>
+        </div>
         <div class="btn-group">
             <button type="submit" class="btn btn-success">
-                <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar</button>
+                <mat-icon>save</mat-icon>&nbsp;Guardar</button>
             <button type="reset"(click)="onReset()" class="btn btn-danger">
-                <fa-icon [icon]='faBackspace'></fa-icon>&nbsp;Cancelar</button>
+                <mat-icon>cancel</mat-icon>&nbsp;Cancelar</button>
         </div>
     </form>
     
@@ -78,4 +113,3 @@
         </div>
     </div>
   </div>
-  

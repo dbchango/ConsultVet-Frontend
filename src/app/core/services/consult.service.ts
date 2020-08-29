@@ -11,7 +11,7 @@ import { retry } from 'rxjs/operators';
 export class ConsultService {
 
   url: string = 'https://consultoriovet-eb010.web.app/api/consults';
-
+  baseurl:string = 'https://consultoriovet-eb010.web.app/api'
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
@@ -22,13 +22,13 @@ export class ConsultService {
 
   constructor(private http:HttpClient) { }
 
-  save(pet: Consult) : Observable<any>{
-    let petBody = JSON.stringify(pet);
-    if(pet.idpet===undefined){
+  save(consult: Consult) : Observable<any>{
+    let petBody = JSON.stringify(consult);
+    if(consult.idconsult===undefined){
       return this.http.post(this.url, petBody,this.httpOptions)
      
     }else{
-      return this.http.put(this.url.concat('/').concat(pet.idpet), petBody, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(consult.idconsult), petBody, this.httpOptions)
     }
   }
 
@@ -46,11 +46,21 @@ export class ConsultService {
     )
   }
 
+  count():Observable<any>{
+    return this.http.get<any>(this.baseurl.concat('/count/consults'))
+  }
+
   list():Observable<Consult[]>{
     return this.http.get<Consult[]>(this.url, this.httpOptions)
     .pipe(
      
     )
+  }
+  listPage(page:number, limit:number): Observable<Consult[]> {
+    return this.http.get<Consult[]>(this.baseurl.concat('/page/consults/').concat(String(page)).concat('/').concat(String(limit)), this.httpOptions)
+      .pipe(
+        retry(1)  
+      )
   }
 
 

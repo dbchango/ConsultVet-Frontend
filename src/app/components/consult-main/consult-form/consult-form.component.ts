@@ -9,6 +9,7 @@ import { Medicine } from '../../../shared/models/medicine';
 import { Prescription } from 'src/app/shared/models/prescription';
 import { VeterinaryService } from 'src/app/core/services/veterinary.service';
 import { Veterinary } from 'src/app/shared/models/veterinary';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-consult-form',
@@ -26,12 +27,12 @@ export class ConsultFormComponent implements OnInit {
   faDirections = faDirections;
 
   formConsult: FormGroup;
-
+  num:number=0;
   veterinaries:Veterinary[];
-  @Input() title: string;
   @Output() flagToReload = new EventEmitter<Boolean>();
   consult = new Consult();
   submitted = false;
+  
   constructor(private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -39,9 +40,11 @@ export class ConsultFormComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params=>{
         if(params['id']){
+          console.warn('Update')
           this.consultService.retrieve(params['id'])
           .subscribe(
             result=>{
+              
               this.consult = result;
               this.consult.idconsult = params['id'];
               if(result.prescription===undefined){
@@ -49,24 +52,25 @@ export class ConsultFormComponent implements OnInit {
               }else{
                 this.consult.prescription = result.prescription
               }
-
+              
             }
+            
           )
         }else{
           this.consult = new Consult();
-          
         }
         this.consult.idpet = params['pet'];
+        this.consult.total = 0;
       }
     );
+    
     this.formConsult = this.formBuilder.group({
-      observation: [''],
-      price: ['', [Validators.required, Validators.min(0)]],
       idveterinary: ['', [Validators.required]],
       status: ['', [Validators.required]],
       date: ['', [Validators.required]],
     });
     this.listVeterinaries();
+
   }
 
   listVeterinaries(){
@@ -86,21 +90,37 @@ export class ConsultFormComponent implements OnInit {
   }
 
   addMedicine($event){
-    console.warn($event);
     let prescription = new Prescription();
     prescription.idmedicine = $event.idmedicine;
     prescription.name = $event.name;
     prescription.description = $event.description;
-    prescription.price = $event.price;
+    prescription.price = $event.price
+    this.num = this.num+Number(prescription.price);
+    
     this.consult.prescription.push(prescription);
+    this.calcTotal();
   }
 
+  calcTotal(){
+    let a:number = 0;
+    this.consult.prescription.forEach(item=>{
+      a += Number(item.price)
+    })
+    this.consult.total = a + this.consult.price
+    console.warn(a)
+    console.warn(this.consult.total)
+  }
+
+
+
   onSubmit(): void{
+    this.calcTotal();
     this.submitted = true;
     if(this.formConsult.invalid){
       console.warn("Invalid form")
       return;
     }
+    console.warn(this.consult)
     this.consultService.save(this.consult).subscribe(
       result=>{
         console.warn(result)

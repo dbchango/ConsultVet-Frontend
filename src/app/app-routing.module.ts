@@ -16,6 +16,8 @@ import { SignUpFormComponent } from './components/sign-up-form/sign-up-form/sign
 import { VeterinaryMainComponent } from './components/veterinary-main/veterinary-main.component';
 import { VeterinaryInfoComponent } from './components/veterinary-main/veterinary-info/veterinary-info.component';
 import { MedicineMainComponent } from './components/medicine-main/medicine-main.component';
+import { VeterinaryConsultComponent } from './components/veterinary-consult/veterinary-consult.component';
+import { ServePetComponent } from './components/serve-pet/serve-pet.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -37,7 +39,10 @@ const routes: Routes = [
   {path: 'veterinary/info', component: VeterinaryInfoComponent},
   {path: 'medicines', component: MedicineMainComponent},
   {path: 'signup', component: SignUpFormComponent},
-  
+  {path: 'consults', component: ConsultListComponent},
+  {path: 'veterinary/consults/:id', component: VeterinaryConsultComponent},
+  {path: 'serve/pet/:id', component: ServePetComponent},
+
 ];
 
 @NgModule({

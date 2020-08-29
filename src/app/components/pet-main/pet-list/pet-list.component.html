@@ -17,15 +17,8 @@
             <td>{{ pet.age }}</td>
             <td>{{ pet.sex }}</td>
             <td>{{ pet.type }}</td>
-
             <td>
-                <button mat-button class="btn btn-sm btn-info" [routerLink]="['/pet/info', pet.idpet]"><mat-icon>info</mat-icon></button>
-                <!--
-                    <button mat-button class="btn btn-sm btn-warning" (click)="update(pet)"><mat-icon>update</mat-icon></button>
-                <button mat-button class="btn btn-sm btn-danger" (click)="delete(pet)"><mat-icon>clear</mat-icon></button>
-
-                -->
-                
+                <button mat-button class="btn btn-sm btn-info" [routerLink]="['/serve/pet', pet.idpet]"><mat-icon>info</mat-icon></button>
             </td>
         </tr>
     </table>
