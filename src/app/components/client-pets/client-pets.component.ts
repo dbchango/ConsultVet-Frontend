@@ -5,7 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import Swal from 'sweetalert2';
 import { ClientService } from 'src/app/core/services/client.service';
 
-
 @Component({
   selector: 'app-client-pets',
   templateUrl: './client-pets.component.html',
@@ -99,7 +98,6 @@ export class ClientPetEditDialog{
     public dialogRef: MatDialogRef<ClientPetEditDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Pet
     ){}
-   
     @Input() flagToReload: Boolean;
     @Input() flagReset: Boolean;
     ngOnInit(): void {

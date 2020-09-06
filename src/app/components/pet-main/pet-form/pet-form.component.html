@@ -65,11 +65,8 @@
                     <mat-form-field apparience="field" class="short-input formWidth">
                         <mat-label>Especie</mat-label>
                         <mat-select [(ngModel)]="pet.type" formControlName="type" [ngClass]="{'is-invalid': submitted && f.type.errors }">
-                            <mat-option value="Perro">Perro</mat-option>
-                            <mat-option value="Gato">Gato</mat-option>
-                            <mat-option value="Perico">Perico</mat-option>
-                            <mat-option value="Hamster">Hamster</mat-option>
-                            <mat-option value="Otros">Otros</mat-option>
+                            <mat-option [value]="item" *ngFor="let item of types" >{{ item }}</mat-option>
+                            
                         </mat-select>
                         <mat-error *ngIf="f.type.hasError('required')&&submitted">
                             No ha seleccionado una especie

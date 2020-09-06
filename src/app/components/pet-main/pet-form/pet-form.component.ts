@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PetFormComponent implements OnInit {
 
-
+  types: string[]= ["Perro", "Gato", "Perico", "Quinde", "Tortuga", "Hamster", "Golondrina", "Otros"]
   faSave = faSave;
   faBackspace =faBackspace;
   faQuoteLeft= faQuoteLeft;

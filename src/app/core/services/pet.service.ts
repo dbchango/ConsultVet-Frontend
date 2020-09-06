@@ -14,7 +14,7 @@ import { Consult } from 'src/app/shared/models/consult';
 export class PetService {
 
   url: string = 'https://consultoriovet-eb010.web.app/api/pets';
-
+  baseurl: string = 'https://consultoriovet-eb010.web.app/api';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
@@ -58,6 +58,13 @@ export class PetService {
     return this.http.get<Consult[]>(this.url.concat('/').concat(id).concat('/consults'), this.httpOptions)
     .pipe(
       retry(1),
+    )
+  }
+
+  countPetTypes():Observable<any>{
+    return this.http.get<any>(this.baseurl.concat('/count/pet/types'), this.httpOptions)
+    .pipe(
+      retry(1)
     )
   }
 

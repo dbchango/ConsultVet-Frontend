@@ -1,9 +1,10 @@
 import { Pet } from './pet';
 import { Veterinary } from './veterinary';
 import { Prescription } from './prescription';
+ 
 export class Consult {
     idconsult?: string;
-    date: string;
+    date: Date;
     observation:string;
     price: number;
     status: number;

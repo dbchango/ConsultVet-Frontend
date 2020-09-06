@@ -62,8 +62,9 @@ export class ConsultFormComponent implements OnInit {
         this.consult.idpet = params['pet'];
         this.consult.total = 0;
       }
+      
     );
-    
+  
     this.formConsult = this.formBuilder.group({
       idveterinary: ['', [Validators.required]],
       status: ['', [Validators.required]],
@@ -88,9 +89,6 @@ export class ConsultFormComponent implements OnInit {
     this.formConsult.reset();
     this.submitted = false;
   }
-
-
-
 
 
   onSubmit(): void{

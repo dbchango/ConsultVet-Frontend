@@ -20,14 +20,19 @@
     <mat-menu #menuGestion="matMenu">
       <button mat-menu-item routerLink="/veterinary">Gestión Veterinarios</button>
       <button mat-menu-item routerLink="/medicines">Gestión Medicinas</button>
-      <button mat-button routerLink="/vaccines">Gestión Vacunas</button>
+      <button mat-menu-item routerLink="/vaccines">Gestión Vacunas</button>
     </mat-menu>
     <button mat-button routerLink="/client">Clientes</button>
     <button mat-button [matMenuTriggerFor]="menuPet" >Mascotas</button>
     <mat-menu #menuPet="matMenu">
       <button mat-menu-item routerLink="/petlist">Listado de mascotas</button>
+      <button mat-menu-item routerLink="/pet/types/statics">Estadisticas</button>
     </mat-menu>
-    <button mat-button routerLink="/consults">Listado de consultas</button>
+    <button mat-button [matMenuTriggerFor]="menuConsults" >Consults</button>
+    <mat-menu #menuConsults="matMenu">
+      <button mat-menu-item routerLink="/consults">Listado de consultas</button>
+      <button mat-menu-item routerLink="/test/consult/statics">Estadisticas</button>
+    </mat-menu>
     <div class="spacer"></div>
     <button mat-button routerLink="/signup">Sign Up</button>
 </mat-toolbar>

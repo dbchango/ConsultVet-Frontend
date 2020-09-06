@@ -18,6 +18,9 @@ import { VeterinaryInfoComponent } from './components/veterinary-main/veterinary
 import { MedicineMainComponent } from './components/medicine-main/medicine-main.component';
 import { VeterinaryConsultComponent } from './components/veterinary-consult/veterinary-consult.component';
 import { ServePetComponent } from './components/serve-pet/serve-pet.component';
+import { PetTypesStaticsComponent } from './components/pet-types-statics/pet-types-statics.component';
+import { ConsultsStaticsComponent } from './components/consults-statics/consults-statics.component';
+import { ConsultsStaticsProfitsComponent } from './components/consults-statics-profits/consults-statics-profits.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -42,7 +45,9 @@ const routes: Routes = [
   {path: 'consults', component: ConsultListComponent},
   {path: 'veterinary/consults/:id', component: VeterinaryConsultComponent},
   {path: 'serve/pet/:id', component: ServePetComponent},
-
+  {path: 'pet/types/statics', component: PetTypesStaticsComponent},
+  {path: 'test/consult/statics', component: ConsultsStaticsComponent},
+  {path: 'test/consult/profits', component: ConsultsStaticsProfitsComponent},
 ];
 
 @NgModule({

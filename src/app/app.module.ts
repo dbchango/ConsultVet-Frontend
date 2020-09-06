@@ -58,6 +58,15 @@ import { MedicineQueryComponent } from './components/medicine-query/medicine-que
 import { VeterinaryConsultComponent } from './components/veterinary-consult/veterinary-consult.component';
 import { ServePetComponent } from './components/serve-pet/serve-pet.component';
 import { EditConsultsComponent } from './components/serve-pet/edit-consults/edit-consults.component';
+import { PetTypesStaticsComponent } from './components/pet-types-statics/pet-types-statics.component';
+//Charat js
+import { ChartsModule } from 'ng2-charts';
+
+//Angular Fire
+import { AngularFireModule } from '@angular/fire';
+import { firebaseConfig } from './shared/models/credentials';
+import { ConsultsStaticsComponent } from './components/consults-statics/consults-statics.component';
+import { ConsultsStaticsProfitsComponent } from './components/consults-statics-profits/consults-statics-profits.component' 
 
 @NgModule({
   declarations: [
@@ -99,6 +108,11 @@ import { EditConsultsComponent } from './components/serve-pet/edit-consults/edit
     VeterinaryConsultComponent,
     ServePetComponent,
     EditConsultsComponent,
+    PetTypesStaticsComponent,
+    ConsultsStaticsComponent,
+    ConsultsStaticsProfitsComponent,
+    
+
   ],
   imports: [
     BrowserModule,
@@ -108,7 +122,9 @@ import { EditConsultsComponent } from './components/serve-pet/edit-consults/edit
     FontAwesomeModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule,
+    AngularFireModule.initializeApp(firebaseConfig())
 
   ],
   providers: [
