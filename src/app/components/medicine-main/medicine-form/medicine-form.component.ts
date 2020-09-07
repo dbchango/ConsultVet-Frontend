@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Medicine } from 'src/app/shared/models/medicine';
 import { MedicineService } from 'src/app/core/services/medicine.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-medicine-form',
   templateUrl: './medicine-form.component.html',
@@ -16,7 +17,7 @@ export class MedicineFormComponent implements OnInit {
   @Output() flagToReload = new EventEmitter<Boolean>();
   submitted = false;
 
-  constructor(private medicineService: MedicineService, private formBuilder:FormBuilder) { }
+  constructor(private authService: AuthService ,private medicineService: MedicineService, private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -26,6 +27,7 @@ export class MedicineFormComponent implements OnInit {
       description: ['', [Validators.required]],
       composition: ['', [Validators.required]]
     });
+    this.authService.getToken();
   }
 
   get f(){
@@ -44,7 +46,7 @@ export class MedicineFormComponent implements OnInit {
       return;
     }
 
-    this.medicineService.save(this.medicine).subscribe(
+    this.medicineService.save(this.medicine, this.authService.userToken).subscribe(
       result=>{
         this.submitted = false;
         if(result.icon === "success"){

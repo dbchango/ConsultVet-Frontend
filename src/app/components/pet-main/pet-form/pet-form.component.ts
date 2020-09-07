@@ -5,6 +5,7 @@ import { Pet } from '../../../shared/models/pet';
 import Swal from 'sweetalert2';
 import { faQuoteLeft, faIdCard, faVenusMars, faCalendarDay,   faSave, faBackspace, faDog } from '@fortawesome/free-solid-svg-icons'
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-pet-form',
   templateUrl: './pet-form.component.html',
@@ -32,7 +33,7 @@ export class PetFormComponent implements OnInit {
   @Output() flagToReaload = new EventEmitter<Boolean>();
   @Output() flagReset = new EventEmitter<Boolean>();
 
-  constructor(private petService : PetService, private formBuilder: FormBuilder, private activeRoute: ActivatedRoute) { }
+  constructor(private authService:AuthService ,private petService : PetService, private formBuilder: FormBuilder, private activeRoute: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -67,6 +68,7 @@ export class PetFormComponent implements OnInit {
       age: ['', []],
       color: ['', []]
     })
+    this.authService.getToken();
   }
 
   get f(){
@@ -86,7 +88,7 @@ export class PetFormComponent implements OnInit {
       console.log('Form Invalid');
       return;
     }
-    this.petService.save(this.pet).subscribe(
+    this.petService.save(this.pet, this.authService.userToken).subscribe(
       result =>{
         this.submitted = false;
         if(result.icon === 'success'){

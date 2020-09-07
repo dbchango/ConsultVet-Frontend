@@ -22,13 +22,20 @@ export class ConsultService {
 
   constructor(private http:HttpClient) { }
 
-  save(consult: Consult) : Observable<any>{
+  save(consult: Consult, token:string) : Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     let petBody = JSON.stringify(consult);
     if(consult.idconsult===undefined){
-      return this.http.post(this.url, petBody,this.httpOptions)
+      return this.http.post(this.url, petBody,httpHeader)
      
     }else{
-      return this.http.put(this.url.concat('/').concat(consult.idconsult), petBody, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(consult.idconsult), petBody, httpHeader)
     }
   }
 
@@ -39,8 +46,15 @@ export class ConsultService {
     )
   }
 
-  delete(id: string):Observable<any>{
-    return this.http.delete(this.url.concat('/').concat(id),  this.httpOptions)
+  delete(id: string, token:string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.delete(this.url.concat('/').concat(id),  httpHeader)
     .pipe(
       
     )
@@ -56,8 +70,15 @@ export class ConsultService {
      
     )
   }
-  listPage(page:number, limit:number): Observable<Consult[]> {
-    return this.http.get<Consult[]>(this.baseurl.concat('/page/consults/').concat(String(page)).concat('/').concat(String(limit)), this.httpOptions)
+  listPage(page:number, limit:number, token: string): Observable<Consult[]> {
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.get<Consult[]>(this.baseurl.concat('/page/consults/').concat(String(page)).concat('/').concat(String(limit)), httpHeader)
       .pipe(
         retry(1)  
       )

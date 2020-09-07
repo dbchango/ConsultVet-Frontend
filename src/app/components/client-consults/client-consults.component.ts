@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { ConsultService } from 'src/app/core/services/consult.service';
 import { Pet } from 'src/app/shared/models/pet';
 import { PetService } from 'src/app/core/services/pet.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-client-consults',
   templateUrl: './client-consults.component.html',
@@ -16,13 +18,17 @@ export class ClientConsultsComponent implements OnInit {
   @Input() flagToQuery: Boolean;
   consults: Consult[];
 
-  constructor(private petService: PetService, private consultService: ConsultService,
+  constructor(private router: Router,private authService: AuthService,private petService: PetService, private consultService: ConsultService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     if(this.flagToQuery===true){
       this.listConsults(this.idpet);
     }
+    this.authService.getToken()
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -98,7 +104,7 @@ export class ClientConsultsComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result)=>{
       if(result.value){
-        this.consultService.delete(consult.idconsult).subscribe(
+        this.consultService.delete(consult.idconsult, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
           }

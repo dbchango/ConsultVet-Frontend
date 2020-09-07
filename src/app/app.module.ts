@@ -66,7 +66,9 @@ import { ChartsModule } from 'ng2-charts';
 import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from './shared/models/credentials';
 import { ConsultsStaticsComponent } from './components/consults-statics/consults-statics.component';
-import { ConsultsStaticsProfitsComponent } from './components/consults-statics-profits/consults-statics-profits.component' 
+import { ConsultsStaticsProfitsComponent } from './components/consults-statics-profits/consults-statics-profits.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MainComponent } from './components/main/main.component' 
 
 @NgModule({
   declarations: [
@@ -111,6 +113,8 @@ import { ConsultsStaticsProfitsComponent } from './components/consults-statics-p
     PetTypesStaticsComponent,
     ConsultsStaticsComponent,
     ConsultsStaticsProfitsComponent,
+    LoginFormComponent,
+    MainComponent,
     
 
   ],

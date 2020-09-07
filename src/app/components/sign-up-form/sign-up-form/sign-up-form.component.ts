@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up-form.component.css']
 })
 export class SignUpFormComponent implements OnInit {
-
+  options=['user', 'veterinary'];
   constructor(private formBuilder: FormBuilder, private authService:AuthService, private router:Router) { }
   submitted = false;
   form : FormGroup
@@ -21,7 +21,7 @@ export class SignUpFormComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         displayName: ['', [Validators.required]],
         password: ['', [Validators.required]],
-        role: ['user', [Validators.required]]
+        role: ['', [Validators.required]]
       }
     )
   }

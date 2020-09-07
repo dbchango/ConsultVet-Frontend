@@ -1,0 +1,28 @@
+
+<div class="user"style="text-align:center">
+    <h2>Ingresar</h2><br><br>
+    <div class="row">
+        <div class="col">
+            <mat-form-field apparience="legacy" class="formWidth" >
+                <mat-label>Email</mat-label>
+                <input #email matInput type="text"  placeholder="email">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field apparience="legacy" class="formWidth" >
+                <mat-label>Contraseña</mat-label>
+                <input #password  matInput type="password"  placeholder="Contraseña">
+            </mat-form-field>
+        </div>
+    </div><br>
+    <div class="btn-group col-4">
+        <button (click)="logIn(email.value, password.value)" type="submit" class="btn btn-success"><mat-icon>login</mat-icon></button>
+        &nbsp;&nbsp;
+        <button type="reset" (click)="onReset()" class="btn btn-danger"><mat-icon>cancel_presentation</mat-icon></button>
+    </div>
+</div>
+
+
+

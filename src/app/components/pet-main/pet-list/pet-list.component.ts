@@ -3,6 +3,8 @@ import { PetService } from '../../../core/services/pet.service';
 import { Pet } from '../../../shared/models/pet';
 import { faEdit, faEraser, faInfo } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pet-list',
@@ -21,13 +23,18 @@ export class PetListComponent implements OnInit {
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() petToEdit = new EventEmitter<Pet>();
 
-  constructor(private petService:PetService) { }
+  constructor(private petService:PetService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.list();
+    this.authService.getToken();
   }
 
   ngOnChanges(changes: SimpleChanges){
+    
     if(changes.flagToReload.currentValue){
       console.log('Flag to reload changed to: '+this.flagToReload);
       if(this.flagToReload){
@@ -37,7 +44,7 @@ export class PetListComponent implements OnInit {
   }
 
   list(): void{
-    this.petService.list().subscribe(
+    this.petService.list(this.authService.userToken).subscribe(
       result=>{
         this.pets = result;
         this.reloadComplete.emit(true);
@@ -75,7 +82,7 @@ export class PetListComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.petService.delete(pet.idpet).subscribe(
+        this.petService.delete(pet.idpet, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.list();

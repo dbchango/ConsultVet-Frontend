@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@
 import { ConsultService } from 'src/app/core/services/consult.service';
 import { Consult } from 'src/app/shared/models/consult';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consult-list',
@@ -23,35 +25,16 @@ export class ConsultListComponent implements OnInit {
   @Output() consultToEdit = new EventEmitter<Consult>();
   
 
-  constructor(private consultService: ConsultService) { }
+  constructor(private consultService: ConsultService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     //this.list();
     this.count();
+    this.authService.getToken();
   }
-/*
-  ngOnChanges(changes: SimpleChanges){
-    if(changes.flagToReload.currentValue){
-      console.log('Flag changed to: '+this.flagToReload);
-      if(this.flagToReload){
-        this.list();
-      }
-    }
-  }
-  */
-/*
-  list(): boolean{
-    this.consultService.list().subscribe(
-      result=>{
-        this.consults = result;
-        console.warn(result)
-      }
-      
-    )
-    return true;
-  }*/
-
-
   
   delete(consult: Consult): void{
     Swal.fire({
@@ -65,7 +48,7 @@ export class ConsultListComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.consultService.delete(consult.idconsult).subscribe(
+        this.consultService.delete(consult.idconsult, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             //this.list();
@@ -104,7 +87,7 @@ export class ConsultListComponent implements OnInit {
 
   loadPage(pg : number){    
     this.currentPage = pg;
-    this.consultService.listPage(pg, this.limit).subscribe(
+    this.consultService.listPage(pg, this.limit, this.authService.userToken).subscribe(
       result => {this.consults = result      
         
     }

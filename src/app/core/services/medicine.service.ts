@@ -22,12 +22,19 @@ export class MedicineService {
 
   constructor(private http: HttpClient) { }
 
-  save(medicine: Medicine):Observable<any>{
+  save(medicine: Medicine, token:string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     let body = JSON.stringify(medicine);
     if(medicine.idmedicine==undefined){
-      return this.http.post(this.url, body, this.httpOptions);
+      return this.http.post(this.url, body, httpHeader);
     }else{
-      return this.http.put(this.url.concat('/').concat(medicine.idmedicine), body, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(medicine.idmedicine), body, httpHeader)
     }
   }
 
@@ -38,8 +45,15 @@ export class MedicineService {
     )
   }
 
-  delete(id:string):Observable<any>{
-    return this.http.delete(this.url.concat('/').concat(id), this.httpOptions)
+  delete(id:string, token:string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.delete(this.url.concat('/').concat(id), httpHeader)
     .pipe(
       retry(1)
     )

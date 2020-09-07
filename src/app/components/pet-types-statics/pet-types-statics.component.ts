@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PetService } from 'src/app/core/services/pet.service';
 import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pet-types-statics',
@@ -10,12 +12,15 @@ import { Color, Label } from 'ng2-charts';
 })
 export class PetTypesStaticsComponent implements OnInit {
 
-  constructor(private petSetvice: PetService) { }
+  constructor(private petSetvice: PetService, private authService: AuthService, private router: Router) { }
 
   PieChart: any=[];
  
   ngOnInit(): void {
-
+    
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     
     const datos: number[] =[];
     this.petSetvice.countPetTypes().subscribe(

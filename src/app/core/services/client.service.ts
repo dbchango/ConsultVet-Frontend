@@ -15,21 +15,28 @@ export class ClientService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/json'
+      'Accept': 'application/json'
     })
   };
 
   constructor(private http: HttpClient) { }
 
-  save(client: Client): Observable<any> {
+  save(client: Client, token: string): Observable<any> {
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     let clientBody = JSON.stringify(client);
     console.log(clientBody);
     if (client.idclient === undefined) {
       return this.http.post(
-        this.url, clientBody, this.httpOptions
+        this.url, clientBody, httpHeader
       )
     } else {
-      return this.http.put(this.url.concat('/').concat(client.idclient), clientBody, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(client.idclient), clientBody, httpHeader)
     }
   }
 
@@ -40,9 +47,17 @@ export class ClientService {
     );
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: string, token: string): Observable<any> {
+    console.warn(token)
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     console.log(id);
-    return this.http.delete(this.url.concat('/').concat(id), this.httpOptions)
+    return this.http.delete(this.url.concat('/').concat(id), httpHeader)
       .pipe(
         retry(1)
       )

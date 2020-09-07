@@ -3,6 +3,7 @@ import { Veterinary } from 'src/app/shared/models/veterinary';
 import { VeterinaryService } from 'src/app/core/services/veterinary.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-veterinary-form',
   templateUrl: './veterinary-form.component.html',
@@ -14,7 +15,7 @@ export class VeterinaryFormComponent implements OnInit {
   @Input() title: string;
   @Output() flagToReload = new EventEmitter<Boolean>();
   submitted = false;
-  constructor(private veterinaryService: VeterinaryService,private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService,private veterinaryService: VeterinaryService,private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -27,6 +28,7 @@ export class VeterinaryFormComponent implements OnInit {
       degree: ['', [Validators.required]],
       gender: ['', [Validators.required]]
     });
+    this.authService.getToken();
   }
 
   get f(){
@@ -45,7 +47,7 @@ export class VeterinaryFormComponent implements OnInit {
       return;
     }
 
-    this.veterinaryService.save(this.veterinary).subscribe(
+    this.veterinaryService.save(this.veterinary, this.authService.userToken).subscribe(
       result=>{
         this.submitted = false;
         if(result.icon === "success"){

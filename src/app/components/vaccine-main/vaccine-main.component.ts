@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vaccine } from 'src/app/shared/models/vaccine';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vaccine-main',
@@ -11,9 +13,12 @@ export class VaccineMainComponent implements OnInit {
   mainVacccine: Vaccine;
   mainTitle: string;
   mainReload: boolean;
-  constructor() { }
+  constructor(private authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.mainReload = false;
     this.onInit();
   }

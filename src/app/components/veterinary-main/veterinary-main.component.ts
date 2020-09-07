@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Veterinary } from 'src/app/shared/models/veterinary';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-veterinary-main',
@@ -12,9 +14,12 @@ export class VeterinaryMainComponent implements OnInit {
   mainTitle: string;
   mainReload: boolean;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.mainReload = false;
     this.onInit();
   }

@@ -23,13 +23,20 @@ export class PetService {
   };
 
   constructor(private http:HttpClient) { }
-  save(pet: Pet) : Observable<any>{
+  save(pet: Pet, token: string) : Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     let petBody = JSON.stringify(pet);
     if(pet.idpet===undefined){
-      return this.http.post(this.url, petBody,this.httpOptions)
+      return this.http.post(this.url, petBody,httpHeader)
      
     }else{
-      return this.http.put(this.url.concat('/').concat(pet.idpet), petBody, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(pet.idpet), petBody, httpHeader)
     }
   }
 
@@ -40,15 +47,29 @@ export class PetService {
     )
   }
 
-  delete(id: string):Observable<any>{
-    return this.http.delete(this.url.concat('/').concat(id),  this.httpOptions)
+  delete(id: string, token: string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.delete(this.url.concat('/').concat(id),  httpHeader)
     .pipe(
       
     )
   }
 
-  list():Observable<Pet[]>{
-    return this.http.get<Pet[]>(this.url, this.httpOptions)
+  list(token: string):Observable<Pet[]>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.get<Pet[]>(this.url, httpHeader)
     .pipe(
      
     )

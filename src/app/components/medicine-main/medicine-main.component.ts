@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Medicine } from 'src/app/shared/models/medicine';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medicine-main',
@@ -10,9 +12,12 @@ export class MedicineMainComponent implements OnInit {
   mainMedicine: Medicine;
   mainTitle: string;
   mainReload: boolean;
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.mainReload = false;
     this.onInit();
   }

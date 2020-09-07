@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Pet } from 'src/app/shared/models/pet';
 import Swal from 'sweetalert2';
 import { VaccineReference } from 'src/app/shared/models/vaccine-reference';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-serve-pet',
@@ -13,7 +14,7 @@ import { VaccineReference } from 'src/app/shared/models/vaccine-reference';
 export class ServePetComponent implements OnInit {
   pet = new Pet;
   flagToQuery:Boolean = false;
-  constructor(private petService: PetService, private activeRoute: ActivatedRoute) { }
+  constructor(private petService: PetService, private activeRoute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(
@@ -28,7 +29,6 @@ export class ServePetComponent implements OnInit {
             }else{
               this.pet.vaccines= result.vaccines
             }
-
             this.flagToQuery = true;
             console.log(this.pet)
     
@@ -36,9 +36,10 @@ export class ServePetComponent implements OnInit {
         }
       }
     );
+    this.authService.getToken();
   }
   save(){
-    this.petService.save(this.pet).subscribe(
+    this.petService.save(this.pet, this.authService.userToken).subscribe(
       result=>{
         if(result.icon==='success'){
           Swal.fire(result);

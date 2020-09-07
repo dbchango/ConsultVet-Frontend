@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter, SimpleChanges } from '@
 import { Medicine } from 'src/app/shared/models/medicine';
 import { MedicineService } from 'src/app/core/services/medicine.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-medicine-list',
@@ -16,7 +17,7 @@ export class MedicineListComponent implements OnInit {
 
   medicines:Medicine[];
   
-  constructor(private medicineService: MedicineService) { }
+  constructor(private medicineService: MedicineService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.list();
@@ -28,6 +29,7 @@ export class MedicineListComponent implements OnInit {
         this.medicines = result;
       }
     )
+    this.authService.getToken();
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -67,7 +69,7 @@ export class MedicineListComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.medicineService.delete(medicine.idmedicine).subscribe(
+        this.medicineService.delete(medicine.idmedicine, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.list();

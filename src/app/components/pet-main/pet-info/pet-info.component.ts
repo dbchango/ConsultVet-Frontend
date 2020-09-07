@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Vaccine } from 'src/app/shared/models/vaccine';
 import { VaccineReference } from 'src/app/shared/models/vaccine-reference';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-pet-info',
@@ -15,7 +16,7 @@ export class PetInfoComponent implements OnInit {
   pet = new Pet;
   flagToQuery:Boolean = false;
   //vaccines : Vaccine[];
-  constructor(private petService: PetService, private activeRoute: ActivatedRoute) { }
+  constructor(private petService: PetService, private activeRoute: ActivatedRoute, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(
@@ -38,11 +39,11 @@ export class PetInfoComponent implements OnInit {
         }
       }
     );
-    
+    this.authService.getToken();
   }
 
   save(){
-    this.petService.save(this.pet).subscribe(
+    this.petService.save(this.pet, this.authService.userToken).subscribe(
       result=>{
         if(result.icon==='success'){
           Swal.fire(result);

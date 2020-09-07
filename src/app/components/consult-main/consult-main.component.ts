@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Consult } from 'src/app/shared/models/consult';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consult-main',
@@ -10,9 +12,12 @@ export class ConsultMainComponent implements OnInit {
   mainReload: Boolean;
   mainTitle: String;
   mainConsult: Consult;
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.mainReload = false;
     this.onInit();
     console.warn(this.mainConsult)

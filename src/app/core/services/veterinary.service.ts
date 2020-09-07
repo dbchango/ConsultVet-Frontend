@@ -20,12 +20,19 @@ export class VeterinaryService {
 
   constructor(private http: HttpClient) { }
 
-  save(veterinary: Veterinary):Observable<any>{
+  save(veterinary: Veterinary, token: string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
     let body = JSON.stringify(veterinary)
     if(veterinary.idveterinary===undefined){
-      return this.http.post(this.url, body, this.httpOptions)
+      return this.http.post(this.url, body, httpHeader)
     }else{
-      return this.http.put(this.url.concat('/').concat(veterinary.idveterinary), body, this.httpOptions)
+      return this.http.put(this.url.concat('/').concat(veterinary.idveterinary), body, httpHeader)
     }
   }
 
@@ -36,8 +43,15 @@ export class VeterinaryService {
     )
   }
 
-  delete(id: string):Observable<any>{
-    return this.http.delete(this.url.concat('/').concat(id),  this.httpOptions)
+  delete(id: string, token: string):Observable<any>{
+    const httpHeader={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization' : token
+      })
+    };
+    return this.http.delete(this.url.concat('/').concat(id),  httpHeader)
     .pipe(
       
     )

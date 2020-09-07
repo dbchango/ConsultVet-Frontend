@@ -30,6 +30,21 @@ export class ServiceInterceptor implements HttpInterceptor {
         if(err.status===400){
           Swal.fire(err);
         }
+        if(err.status === 401){
+          Swal.fire({
+            title : "Unauthorized user",
+            text : err.error.message,
+            icon : "error"
+          });
+        }
+        if(err.status === 403){
+          Swal.fire({
+            title : "Unauthorized user",
+            text : err.error.message,
+            icon : "warning"
+          });
+        }
+
       }
     );
 

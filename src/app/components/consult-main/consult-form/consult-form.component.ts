@@ -10,6 +10,7 @@ import { Prescription } from 'src/app/shared/models/prescription';
 import { VeterinaryService } from 'src/app/core/services/veterinary.service';
 import { Veterinary } from 'src/app/shared/models/veterinary';
 import { concat } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-consult-form',
@@ -33,7 +34,7 @@ export class ConsultFormComponent implements OnInit {
   consult = new Consult();
   submitted = false;
   
-  constructor(private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
+  constructor(private authService:AuthService ,private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -71,7 +72,7 @@ export class ConsultFormComponent implements OnInit {
       date: ['', [Validators.required]],
     });
     this.listVeterinaries();
-
+    this.authService.getToken();
   }
 
   listVeterinaries(){
@@ -99,7 +100,7 @@ export class ConsultFormComponent implements OnInit {
       return;
     }
     console.warn(this.consult)
-    this.consultService.save(this.consult).subscribe(
+    this.consultService.save(this.consult, this.authService.userToken).subscribe(
       result=>{
         console.warn(result)
         this.submitted = false;

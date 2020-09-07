@@ -9,6 +9,7 @@ import { Prescription } from 'src/app/shared/models/prescription';
 import Swal from 'sweetalert2';
 import { Pet } from 'src/app/shared/models/pet';
 import { Client } from 'src/app/shared/models/client';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-veterinary-consult',
   templateUrl: './veterinary-consult.component.html',
@@ -20,7 +21,7 @@ export class VeterinaryConsultComponent implements OnInit {
   veterinaries:Veterinary[];
   submitted = false;
   formConsult: FormGroup;
-  constructor(private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService ,private vaterinaryService:VeterinaryService, private activatedRoute: ActivatedRoute,private consultService:ConsultService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.consult.pet = new Pet();
@@ -47,6 +48,7 @@ export class VeterinaryConsultComponent implements OnInit {
       status: ['', [Validators.required]]
     });
     this.listVeterinaries();
+    this.authService.getToken();
   }
 
   listVeterinaries(){
@@ -64,6 +66,7 @@ export class VeterinaryConsultComponent implements OnInit {
   onReset(): void{
     this.formConsult.reset();
     this.submitted = false;
+    
   }
 
   addMedicine($event){
@@ -82,7 +85,7 @@ export class VeterinaryConsultComponent implements OnInit {
       return;
     }
     console.warn(this.consult)
-    this.consultService.save(this.consult).subscribe(
+    this.consultService.save(this.consult, this.authService.userToken).subscribe(
       result=>{
         this.submitted = false;
         if(result.icon === 'success'){

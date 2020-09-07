@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Vaccine } from 'src/app/shared/models/vaccine';
 import { VaccineService } from 'src/app/core/services/vaccine.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-vaccine-query',
   templateUrl: './vaccine-query.component.html',
@@ -13,10 +14,11 @@ export class VaccineQueryComponent implements OnInit {
   @Input() flagToReload = new Boolean;
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() vaccineToEdit = new EventEmitter<Vaccine>();
-  constructor(private vaccineServices: VaccineService) { }
+  constructor(private vaccineServices: VaccineService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.list();
+    this.authService.getToken();
   }
 
   list(){
@@ -44,7 +46,7 @@ export class VaccineQueryComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.vaccineServices.delete(vaccine.idvaccine).subscribe(
+        this.vaccineServices.delete(vaccine.idvaccine, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.list();

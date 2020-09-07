@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../shared/models/client';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-main',
@@ -11,11 +13,15 @@ export class ClientMainComponent implements OnInit {
   mainClient: Client;
   mainTitle: string;
   mainReload: boolean;
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     this.mainReload = false;
     this.onInit();
+    console.warn(this.authService.userToken)
   }
 
   onInit(){

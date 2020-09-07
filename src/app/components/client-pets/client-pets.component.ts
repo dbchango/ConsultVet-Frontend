@@ -4,6 +4,7 @@ import { PetService } from 'src/app/core/services/pet.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { ClientService } from 'src/app/core/services/client.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-client-pets',
@@ -16,12 +17,13 @@ export class ClientPetsComponent implements OnInit {
   @Output() petsout = new EventEmitter<Pet[]>();
   @Input() clientid: string;
 
-  constructor(private petService: PetService, public dialog: MatDialog, private clientService: ClientService) { }
+  constructor(private petService: PetService, public dialog: MatDialog, private clientService: ClientService, private authService:AuthService) { }
 
   ngOnInit(): void {
     if(this.flagToQuery===true){
       this.listPets(this.clientid);
     }
+    this.authService.getToken();
   }
 
   listPets(id: string): void{
@@ -77,7 +79,7 @@ export class ClientPetsComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result)=>{
       if(result.value){
-        this.petService.delete(pet.idpet).subscribe(
+        this.petService.delete(pet.idpet, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.listPets(this.clientid);

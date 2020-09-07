@@ -4,6 +4,7 @@ import { Client } from '../../../shared/models/client';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { faQuoteLeft, faIdCard, faVenusMars, faCalendarDay, faPhoneAlt, faDirections, faSave, faBackspace } from '@fortawesome/free-solid-svg-icons'
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ClientFormComponent implements OnInit {
   @Input() title: String;//Titulo enviado desde el padre-actualizacion del registro
   @Output() flagToReload = new EventEmitter<Boolean>();//Bandera de estado del formulario que se enviara al padre
   submitted = false;//indica si el registro se proceso con exito
-  constructor(private clientService: ClientService, private formBuilder: FormBuilder) { }
+  constructor(private clientService: ClientService, private formBuilder: FormBuilder, private authService: AuthService) { }
   
   ngOnInit(): void {
     this.formClient = this.formBuilder.group({
@@ -40,6 +41,7 @@ export class ClientFormComponent implements OnInit {
       direction: ['', [Validators.required]],
       gender: ['', [Validators.required]]
     });
+    this.authService.getToken();
   }
 
   get f(){
@@ -59,7 +61,7 @@ export class ClientFormComponent implements OnInit {
       return;
     }
     
-    this.clientService.save(this.client).subscribe(
+    this.clientService.save(this.client, this.authService.userToken).subscribe(
       result=>{
         //console.log(result);
         this.submitted = false;

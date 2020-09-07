@@ -21,9 +21,12 @@ import { ServePetComponent } from './components/serve-pet/serve-pet.component';
 import { PetTypesStaticsComponent } from './components/pet-types-statics/pet-types-statics.component';
 import { ConsultsStaticsComponent } from './components/consults-statics/consults-statics.component';
 import { ConsultsStaticsProfitsComponent } from './components/consults-statics-profits/consults-statics-profits.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: '', component: MainComponent},
   {path: 'client', component: ClientMainComponent},
   {path: 'pet', component: PetMainComponent},
   {path: 'vaccines', component: VaccineMainComponent},
@@ -48,6 +51,7 @@ const routes: Routes = [
   {path: 'pet/types/statics', component: PetTypesStaticsComponent},
   {path: 'test/consult/statics', component: ConsultsStaticsComponent},
   {path: 'test/consult/profits', component: ConsultsStaticsProfitsComponent},
+  {path: 'login', component: LoginFormComponent},
 ];
 
 @NgModule({

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultService } from 'src/app/core/services/consult.service';
 import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consults-statics',
@@ -13,9 +15,12 @@ export class ConsultsStaticsComponent implements OnInit {
   dataConsultsProfits: number[];
   dataConsultsQuantity: number[];
 
-  constructor(private consultService: ConsultService) { }
+  constructor(private consultService: ConsultService, private authService:AuthService, private router: Router) { }
   PieChart: any=[];
   ngOnInit(): void {
+    if(this.authService.userToken===undefined){
+      this.router.navigate(['/login'])
+    }
     
     let index: number;
     this.consultService.list().subscribe(

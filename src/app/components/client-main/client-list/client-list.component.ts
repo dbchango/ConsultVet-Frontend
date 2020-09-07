@@ -3,6 +3,7 @@ import { ClientService } from '../../../core/services/client.service';
 import { Client } from '../../../shared/models/client';
 import Swal from 'sweetalert2';
 import { faEdit, faTrash, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-client-list',
@@ -26,10 +27,11 @@ export class ClientListComponent implements OnInit {
   @Output() reloadComplete = new EventEmitter<Boolean>();
   @Output() clientToEdit = new EventEmitter<Client>();
   
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.count();
+    this.authService.getToken();
   }
 
   init():void{
@@ -122,7 +124,7 @@ export class ClientListComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.clientService.delete(client.idclient).subscribe(
+        this.clientService.delete(client.idclient, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.loadPage(this.currentPage);

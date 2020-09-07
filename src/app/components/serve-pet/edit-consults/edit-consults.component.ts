@@ -3,6 +3,7 @@ import { PetService } from 'src/app/core/services/pet.service';
 import { ConsultService } from 'src/app/core/services/consult.service';
 import { Consult } from 'src/app/shared/models/consult';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-edit-consults',
@@ -13,12 +14,13 @@ export class EditConsultsComponent implements OnInit {
   @Input() idpet: string;
   @Input() flagToQuery: Boolean;
   consults: Consult[];
-  constructor(private petService: PetService, private consultService: ConsultService) { }
+  constructor(private petService: PetService, private consultService: ConsultService, private authService: AuthService) { }
 
   ngOnInit(): void {
     if(this.flagToQuery===true){
       this.listConsults(this.idpet);
     }
+    this.authService.getToken();
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -52,7 +54,7 @@ export class EditConsultsComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result)=>{
       if(result.value){
-        this.consultService.delete(consult.idconsult).subscribe(
+        this.consultService.delete(consult.idconsult, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
           }

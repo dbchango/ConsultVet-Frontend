@@ -28,13 +28,15 @@
       <button mat-menu-item routerLink="/petlist">Listado de mascotas</button>
       <button mat-menu-item routerLink="/pet/types/statics">Estadisticas</button>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="menuConsults" >Consults</button>
+    <button mat-button [matMenuTriggerFor]="menuConsults" >Consultas</button>
     <mat-menu #menuConsults="matMenu">
       <button mat-menu-item routerLink="/consults">Listado de consultas</button>
       <button mat-menu-item routerLink="/test/consult/statics">Estadisticas</button>
     </mat-menu>
     <div class="spacer"></div>
     <button mat-button routerLink="/signup">Sign Up</button>
+    <button mat-button (click)="logOut()" *ngIf="log()">Salir</button>
+    <button mat-button routerLink="/login" *ngIf="!log()">Login</button>
 </mat-toolbar>
 
 <div class="content" role="main">

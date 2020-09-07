@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@
 import { Veterinary } from 'src/app/shared/models/veterinary';
 import { VeterinaryService } from 'src/app/core/services/veterinary.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-veterinary-list',
@@ -16,7 +17,7 @@ export class VeterinaryListComponent implements OnInit {
 
   veterinaries: Veterinary[];
 
-  constructor(private veterinaryService: VeterinaryService) { }
+  constructor(private veterinaryService: VeterinaryService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.list();
@@ -68,7 +69,7 @@ export class VeterinaryListComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.veterinaryService.delete(veterinary.idveterinary).subscribe(
+        this.veterinaryService.delete(veterinary.idveterinary, this.authService.userToken).subscribe(
           result=>{
             Swal.fire(result);
             this.list();
